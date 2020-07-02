@@ -1,0 +1,5 @@
+.env
+vendor
+public/app
+node_modules
+composer.lock

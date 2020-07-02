@@ -1,0 +1,24 @@
+{
+  "name": "vacation-planner",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "docker exec -it vacation_planner_web php database/migrate.php",
+    "seed": "docker exec -it vacation_planner_web php database/seed.php"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gkoniaris/vacation-planner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gkoniaris/vacation-planner/issues"
+  },
+  "homepage": "https://github.com/gkoniaris/vacation-planner#readme",
+  "description": "",
+  "dependencies": {
+  }
+}

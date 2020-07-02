@@ -1,0 +1,45 @@
+version: '2.4'
+services:
+  web:
+    container_name: "vacation_planner_web"
+    env_file:
+      - .env
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    user: $UID:$GID
+    ports:
+      - "8081:8081"
+    volumes:
+      - ${PWD}:/var/www
+    working_dir: /var/www
+    command: php -S 0.0.0.0:8081 public/index.php
+    depends_on: 
+      - db
+  db:
+    container_name: "vacation_planner_db"
+    env_file:
+      - .env
+    build:
+      context: ./docker/mysql
+      dockerfile: Dockerfile
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3390:3306"
+  frontend:
+      container_name: "vacation_planner_frontend"
+      image: node:alpine
+      volumes:
+        - ./frontend/:/app/frontend
+      working_dir: /app/frontend
+      environment:
+        NODE_ENV: development
+      ports:
+        - 8080:8080
+      command: npm run serve
