@@ -76,11 +76,11 @@ You can then access the frontend of the application at [http://localhost:8080](h
 
 ## Screenshots
 
-![Screenshot 1 of Vacation Planner](https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%201.PNG | width=100)
+<a href="https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%201.PNG"><img src="https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%201.PNG" align="left" height="auto" width="48" ></a>
 
-![Screenshot 2 of Vacation Planner](https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%202.PNG | width=100)
+<a href="https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%202.PNG"><img src="https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%202.PNG" align="left" height="auto" width="48" ></a>
 
-![Screenshot 3 of Vacation Planner](https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%203.PNG | width=100)
+<a href="https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%203.PNG"><img src="https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%203.PNG" align="left" height="auto" width="48" ></a>
 
 
 ## Author
