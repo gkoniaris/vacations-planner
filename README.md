@@ -76,7 +76,7 @@ You can then access the frontend of the application at [http://localhost:8080](h
 
 ## Screenshots
 
-<p>
+<p width="100%">
   <a href="https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%201.PNG"><img src="https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%201.PNG" align="left" height="auto" width="200" ></a>
 
   <a href="https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%202.PNG"><img src="https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%202.PNG" align="left" height="auto" width="200" ></a>
