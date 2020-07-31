@@ -13,4 +13,8 @@ interface BaseModelInterface
 
     public function update($id, $data);
 
+    public function where($field, $equalityOperator, $data);
+
+    public function get();
+
 }

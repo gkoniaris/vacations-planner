@@ -83,9 +83,18 @@ class Database extends Singleton {
 
     public static function insert($query, $params = [])
     {
+        $dbh = static::getInstance()::$connection;
         $initialStmt = static::getInstance()::$connection->prepare($query);
+        
+        $inTransaction = $dbh->inTransaction();
+        if (!$inTransaction) $dbh->beginTransaction();
 
-        return $initialStmt->execute($params);
+        $initialStmt->execute($params);
+        $lastInsertedId = $dbh->lastInsertId();
+
+        if (!$inTransaction) $dbh->commit();
+
+        return $lastInsertedId;
     }
 
     public static function create($query)

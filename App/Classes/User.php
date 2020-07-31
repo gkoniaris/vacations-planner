@@ -62,47 +62,24 @@ class User {
         $salt = Helpers::randomString();
         $hashedPassword = hash('sha256' , $salt . '.' . Helpers::randomString(30));
        
-        try {
-            Database::beginTransaction();
-            
-            $user = Database::select('SELECT id FROM users WHERE email = ?', [$data->email]);
+        $user = Database::select('SELECT id FROM users WHERE email = ?', [$data->email]);
 
-            //Return if user already exists
-            if ($user) {
-                throw new FunctionalException('User with this email already exists');
-            }
-
-            $user = Database::insert('INSERT INTO users(id, first_name, last_name, email, salt, password, role) 
-                VALUES(NULL, ?, ?, ?, ?, ?, ?)', [
-                    $data->first_name,
-                    $data->last_name,
-                    $data->email,
-                    $salt,
-                    $hashedPassword,
-                    $data->role
-                ]);
-
-            $user = Database::select('SELECT * FROM users ORDER BY id DESC');
-            
-            // If user is an employee, we create a paid time off record in the database
-            if ($data->role === 'employee') {
-                Database::insert('INSERT INTO pto(employee_id, remaining_days) VALUES(?, ?)', [$user['id'], 21]);
-            }
-
-            Database::insert('INSERT INTO supervisor_employee(employee_id, supervisor_id) 
-                VALUES(?, ?)', [
-                    $user['id'], 
-                    1
-                ]);
-            
-            Database::commit();
-
-            return $user;
-        } catch(\Exception $e) {
-            Database::rollback();
-            throw $e;
+        //Return if user already exists
+        if ($user) {
+            throw new FunctionalException('User with this email already exists');
         }
-        
+
+        $user = $this->user->fill([
+            'first_name' => $data->first_name,
+            'last_name' => $data->last_name,
+            'email' => $data->email,
+            'salt' => $salt,
+            'password' => $hashedPassword,
+            'role' => $data->role
+        ]);
+
+        $user = $user->save();
+
         return $user;
     }
 
