@@ -1,12 +1,11 @@
 <template>
   <div class="row login-page">
-    <div class="col-md-10 offset-1 mt-5">
+    <div class="col-xl-10 offset-1 mt-5">
         <div class="card">
           <div class="row no-gutters">
-              <div class="col-md-6">
-                  <img src="@/assets/images/login-image.jpg" class="img-fluid" alt="">
+              <div class="col-xl-6 col-lg-12 login-image">
               </div>
-              <div class="col-md-6">
+              <div class="col-xl-6 col-lg-12">
                   <div class="card-block px-2 text-center mt-3 pr-5 pl-5">
                       <h4 class="card-title">WELCOME BACK</h4>
                       <form>
@@ -75,16 +74,18 @@ export default {
   background: #248de6;
 }
 .login-page {
-  display: flex;
-  align-items: center;
-  justify-items: center;
+  margin: 0;
   position: absolute;
-  top: 18%;
-  left: 20%;
-  width: 60%;
-  height: 60%;
-  overflow:hidden;
-
+  left: 10%;
+  top: 50%;
+  width: 80%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.login-image {
+  background-image: url('../assets/images/login-image.jpg');
+  background-position: center;
+  background-size: cover;
 }
 .form-control{
   padding: 30px 20px;
@@ -93,9 +94,36 @@ export default {
 .btn {
   border-radius: 100px;
   padding: 20px;
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .card-title{
-  margin: 50px 0;
+  margin: 60px 0;
 }
+@media (min-width: 1200px) {  
+ .login-page {
+    margin: 0;
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    width: 80%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  .login-image {
+    min-height: 500px;
+  }
+}
+@media (max-width: 1200px) {  
+ .login-page {
+   position:relative;
+   -ms-transform: translateY(0);
+    transform: translateY(0);
+    margin-bottom: 50px;
+ }
+ .login-image {
+   min-height: 300px;
+ }
+}
+
 </style>
