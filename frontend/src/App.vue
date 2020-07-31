@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+      <div class="container-fluid">
         <a class="navbar-brand" href="/">Vacation planner</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,17 @@
         </div>
       </div>
     </nav>
-    <router-view class="mt-5 container"/>
+    <div class="left-navbar" v-if="isLogged">
+        <router-link class="item" to="/admin/users" v-if="role === 'supervisor'">
+            <i class="fa fa-users pr-2" aria-hidden="true"></i> Employees <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>
+        </router-link>
+        <a class="item">
+            <i class="fa fa-calendar pr-2" aria-hidden="true"></i> Calendar <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="container mt-5">
+      <router-view class="mt-3"/>
+    </div>
   </div>
 </template>
 
@@ -70,5 +80,32 @@ export default {
 <style>
   .cursor-pointer {
     cursor: pointer;
+  }
+  .left-navbar {
+    position: fixed;
+    top: 57px;
+    left: 0;
+    z-index: 1000;
+    background: #248de6;
+    width: 300px;
+    height: 100%;
+  }
+  .left-navbar .item {
+    padding-left: 35px;
+    margin-top: 40px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    display: block;
+    cursor: pointer;
+  }
+  .left-navbar .item.router-link-active {
+    color: #3e3e3e;
+  }
+  .left-navbar .item-arrow {
+    position: absolute;
+    right: 20px;
+    top: 5px;
   }
 </style>

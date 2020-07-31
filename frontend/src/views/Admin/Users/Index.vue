@@ -5,13 +5,10 @@
             <router-link to="/admin/users/create" class="btn btn-primary btn-sm float-right mt-2">New User</router-link>
         </h2>
 
-        <table class="table table-striped table-sm">
+        <table class="table table-hover table-sm">
             <thead>
                 <th>
-                    First name
-                </th>
-                <th>
-                    Last name
+                    Full name
                 </th>
                 <th>
                     Email
@@ -26,10 +23,7 @@
             <tbody>
                 <tr v-bind:key="employee.id" v-for="employee in employees">
                     <td>
-                        {{employee.first_name}}
-                    </td>
-                    <td>
-                        {{employee.last_name}}
+                        {{employee.first_name}} {{employee.last_name}}
                     </td>
                     <td>
                         {{employee.email}}
