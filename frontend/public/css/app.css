@@ -1,4 +1,15 @@
+body {
+    font-family: 'Montserrat', sans-serif !important;
+}
 .form-control {
     border-radius: 100px !important;
     background: white !important;
+}
+.navbar.bg-light {
+    background-color: #007bff!important;
+}
+
+.navbar.bg-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+    color: #e2e2e2;
 }

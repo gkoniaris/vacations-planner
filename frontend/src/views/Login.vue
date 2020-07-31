@@ -1,6 +1,6 @@
 <template>
   <div class="row login-page">
-    <div class="col-xl-10 offset-1 mt-5">
+    <div class="col-xl-8 offset-xl-2 mt-5">
         <div class="card">
           <div class="row no-gutters">
               <div class="col-xl-6 col-lg-12 login-image">
