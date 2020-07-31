@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Classes\User;
+use App\Services\UserService;
 use App\Singletons\Request;
 use App\Singletons\Response;
 use App\Validators\LoginValidator;
@@ -13,7 +13,7 @@ class AuthController extends BaseController
 
     public function __construct()
     {
-        $this->user = new User;
+        $this->user = new UserService();
     }
 
     public function login()

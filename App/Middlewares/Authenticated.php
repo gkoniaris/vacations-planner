@@ -3,7 +3,6 @@ namespace App\Middlewares;
 use App\Singletons\Request;
 use App\Singletons\Response;
 use App\Singletons\Database;
-use App\Classes\User;
 
 /**
  * Middleware that checks if a user has a valid active session

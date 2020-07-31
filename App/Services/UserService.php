@@ -1,12 +1,12 @@
 <?php
-namespace App\Classes;
+namespace App\Services;
 
 use App\Singletons\Database;
 use App\Classes\Helpers;
 use App\FunctionalException;
 use App\Models\User as UserModel;
 
-class User {
+class UserService {
 
     public function __construct(){
         $this->user = new UserModel();

@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Singletons\Request;
 use App\Singletons\Response;
-use App\Classes\User;
+use App\Services\UserService;
 use App\Validators\UserCreateValidator;
 use App\Validators\UserUpdateValidator;
 use App\FunctionalException;
@@ -15,7 +15,7 @@ class UserController extends BaseController
 
     public function __construct()
     {
-        $this->user = new User;
+        $this->user = new UserService();
     }
 
     public function index()
