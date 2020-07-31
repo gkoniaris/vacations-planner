@@ -74,6 +74,13 @@ After running these commands you will have a fully working docker environment an
 
 You can then access the frontend of the application at [http://localhost:8080](http://localhost:8080/) and the API at [http://localhost:8081](http://localhost:8081).
 
+## Screenshots
+
+![Screenshot 1 of Vacation Planner](https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot1.PNG "Screenshot 1")
+
+![Screenshot 2 of Vacation Planner](https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot2.PNG "Screenshot 2")
+
+
 ## Author
 
 👤 **George Koniaris**
