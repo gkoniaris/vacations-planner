@@ -16,6 +16,7 @@
                         <input placeholder="Enter your password" v-model="password" class="form-control" type="password" />
                       </div>
                       <div class="btn btn-primary btn-block float-right" @click="login()">LOGIN</div>
+                      <div>Don't have an account yet? <router-link to="/">Register now</router-link>.</div>
                     </form>
                   </div>
               </div>
@@ -95,7 +96,7 @@ export default {
 .btn {
   border-radius: 100px;
   padding: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 .card-title{
@@ -119,8 +120,8 @@ export default {
  .login-page {
    position:relative;
    -ms-transform: translateY(0);
-    transform: translateY(0);
-    margin-bottom: 50px;
+   transform: translateY(0);
+   margin-bottom: 50px;
  }
  .login-image {
    min-height: 300px;
