@@ -4,10 +4,13 @@ namespace App\Classes;
 use App\Singletons\Database;
 use App\Classes\Helpers;
 use App\FunctionalException;
+use App\Models\User as UserModel;
 
-class User{
+class User {
 
-    public function __construct(){}    
+    public function __construct(){
+        $this->user = new UserModel();
+    }    
 
     /**
      * Performs login and creates a session for the user
@@ -35,14 +38,17 @@ class User{
      */
     public function all()
     {
-        $users = Database::selectAll('SELECT id, first_name, last_name, email, role FROM users');
+        $users = $this->user->all();
 
         return $users;
     }
 
+    /**
+     * Returns a specific user by it's id
+     */
     public function get($id)
     {
-        $user = Database::select('SELECT id, first_name, last_name, email, role FROM users WHERE id = ?', [$id]);
+        $user = $this->user->find($id);
 
         return $user;
     }

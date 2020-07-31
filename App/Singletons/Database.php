@@ -53,20 +53,30 @@ class Database extends Singleton {
     /**
      * ORM like functions wrapping the PHP PDO 
      */
-    public static function select($query, $params = [])
+    public static function select($query, $params = [], $model = null)
     {
         $initialStmt = static::getInstance()::$connection->prepare($query);
 
         $initialStmt->execute($params);
+
+        if($model) {
+            $initialStmt->setFetchMode(\PDO::FETCH_CLASS, $model); 
+
+            return $initialStmt->fetch();
+        }
 
         return $initialStmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public static function selectAll($query, $params = [])
+    public static function selectAll($query, $params = [], $model = null)
     {
         $initialStmt = static::getInstance()::$connection->prepare($query);
 
         $initialStmt->execute($params);
+
+        if($model) {
+            return $initialStmt->fetchAll(\PDO::FETCH_CLASS, $model);
+        }
 
         return $initialStmt->fetchAll(\PDO::FETCH_ASSOC);
     }
