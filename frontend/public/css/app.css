@@ -35,6 +35,11 @@ body {
     border-radius: 0;
     background: #f8d5d3;
 }
+
+.awn-toast.awn-toast-success .awn-toast-wrapper {
+    border-radius: 0;
+    background: #f4ffee;
+}
 .awn-toast-icon .fa {
     font-size: 25px;
 }
