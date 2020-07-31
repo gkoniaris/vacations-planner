@@ -94,8 +94,9 @@ You can then access the frontend of the application at [http://localhost:8080](h
   </a>
 </p>
 
+<p>
 <br/>
-
+</p>
 
 ## Author
 
