@@ -11,6 +11,6 @@ CREATE TABLE `vacation_applications` (
   PRIMARY KEY (`id`),
   KEY `fk_vacation_applications_employee_id_idx` (`employee_id`),
   KEY `fk_vacation_applications_approved_by_supervisor_id_idx` (`approved_by_supervisor_id`),
-  CONSTRAINT `fk_vacation_applications_approved_by_supervisor_id` FOREIGN KEY (`approved_by_supervisor_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_vacation_applications_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_vacation_applications_approved_by_supervisor_id` FOREIGN KEY (`approved_by_supervisor_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vacation_applications_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
