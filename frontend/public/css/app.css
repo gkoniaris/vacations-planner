@@ -10,3 +10,31 @@ body {
 .navbar-light .navbar-nav .nav-link {
     color: #e2e2e2;
 }
+.input-group-addon {
+    width: 40px;
+    padding-top: 8px;
+    text-align: center;
+    background: #007bff94;
+    color: white;
+}
+.awn-toast-wrapper {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    height: 80px;
+    width: 100%;
+    text-align: center;
+}
+.awn-toast {
+    height: 100%;
+}
+.awn-toast-wrapper{
+    padding-top: 12px;
+}
+.awn-toast.awn-toast-alert .awn-toast-wrapper {
+    border-radius: 0;
+    background: #f8d5d3;
+}
+.awn-toast-icon .fa {
+    font-size: 25px;
+}

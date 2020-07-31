@@ -1,10 +1,12 @@
 <template>
     <div class="row">
         <div class="col-md-12">
-            <h2 class="mb-3">
-                Your Employees
-                <router-link to="/admin/users/create" class="btn btn-primary btn-sm float-right mt-2">New User</router-link>
-            </h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Employees</li>
+                </ol>
+            </nav>
+            <router-link to="/admin/users/create" class="btn btn-primary btn-sm mb-3 float-right mt-2">New Employee</router-link>
 
             <table class="table table-hover">
                 <thead class="thead-dark">
@@ -15,7 +17,7 @@
                         Email
                     </th>
                     <th>
-                        Type
+                        Role
                     </th>
                     <th>
                         Actions

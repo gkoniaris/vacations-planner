@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-bind:class="{'logged-in': isLogged}">
+  <div id="app" v-bind:class="{'is-logged': isLogged}">
     <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="/"><i class="fa fa-plane pr-3" aria-hidden="true"></i> Vacation planner</a>
@@ -115,7 +115,7 @@ export default {
     padding: 0 50px;
   }
 
-  .is-logged.main-body {  
+  .is-logged .main-body {  
     margin-left: 300px;
     width: calc(100% - 300px);
   }
