@@ -80,6 +80,8 @@ You can then access the frontend of the application at [http://localhost:8080](h
 
 ![Screenshot 2 of Vacation Planner](https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%202.PNG "Screenshot 2")
 
+![Screenshot 3 of Vacation Planner](https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%203.PNG "Screenshot 3")
+
 
 ## Author
 
