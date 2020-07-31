@@ -16,7 +16,8 @@
     "popper.js": "^1.16.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
-    "vuejs-datepicker": "^1.6.2"
+    "vuejs-datepicker": "^1.6.2",
+    "lodash": "^4.17.19"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
