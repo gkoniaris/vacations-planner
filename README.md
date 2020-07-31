@@ -64,7 +64,7 @@ After finishing the above steps, setup your smtp info in the .env file.
 
 Run the following commands
 
-```
+```sh
 docker-compose up
 
 npm run migrate
