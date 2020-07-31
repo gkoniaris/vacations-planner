@@ -19,14 +19,14 @@
                         <label>Email</label>
                         <input v-model="user.email" type="email" class="form-control"/>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>Password</label>
                         <input v-model="user.password" type="password" class="form-control"/>
                     </div>
                     <div class="form-group">
                         <label>Confirm Password</label>
                         <input v-model="user.confirm_password" type="password" class="form-control"/>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label>User Type</label>
                         <select v-model="user.role" class="form-control">
@@ -61,9 +61,9 @@ export default {
  },
   methods: {
     createUser() {
-        http.put('/api/users', this.user, {withCredentials: true})
+        http.post('/api/users', this.user, {withCredentials: true})
         .then(() => {
-            notifier.success('User updated successfully')
+            notifier.success('User created successfully')
             this.user = {}
         })
         .catch(err => {

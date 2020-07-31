@@ -17,13 +17,6 @@
             <label>Email</label>
             <input v-model="user.email" type="email" class="form-control" />
           </div>
-          <div class="form-group">
-            <label>User Type</label>
-            <select v-model="user.role" class="form-control">
-              <option value="employee">Employee</option>
-              <option value="supervisor">Supervisor</option>
-            </select>
-          </div>
 
           <div class="btn btn-primary btn-block" @click="updateUser()">Update user</div>
         </form>

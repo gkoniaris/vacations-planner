@@ -54,7 +54,7 @@ class User{
     public function create($data)
     {
         $salt = Helpers::randomString();
-        $hashedPassword = hash('sha256' , $salt . '.' . $data->password);
+        $hashedPassword = hash('sha256' , $salt . '.' . Helpers::randomString(30));
        
         try {
             Database::beginTransaction();
@@ -66,13 +66,13 @@ class User{
                 throw new FunctionalException('User with this email already exists');
             }
 
-            $user = Database::insert('INSERT INTO users(id, first_name, last_name, email, password, salt, role) 
+            $user = Database::insert('INSERT INTO users(id, first_name, last_name, email, salt, password, role) 
                 VALUES(NULL, ?, ?, ?, ?, ?, ?)', [
                     $data->first_name,
                     $data->last_name,
                     $data->email,
-                    $hashedPassword,
                     $salt,
+                    $hashedPassword,
                     $data->role
                 ]);
 
@@ -115,7 +115,6 @@ class User{
             $data->email,
             $data->first_name,
             $data->last_name,
-            $data->role,
             $data->id
         ]);
 
