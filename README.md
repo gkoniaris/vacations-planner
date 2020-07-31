@@ -27,7 +27,8 @@ Vacation planner is a side/pet project written in plain PHP, allowing companies 
 - Supervisor / Employee roles
 - Supervisors can manage their employees from the admin dashboard
 - Employees can request vacation time from their supervisor
-- Supervisor can approve / reject vacation time
+- Supervisors can approve / reject vacation time
+- Supervisors can see all vacations in a practical calendar
 - All notifications are performed via email
 
 ## Prerequisites
