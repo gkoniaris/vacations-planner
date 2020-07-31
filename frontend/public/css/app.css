@@ -1,10 +1,7 @@
 body {
     font-family: 'Montserrat', sans-serif !important;
 }
-.form-control {
-    border-radius: 100px !important;
-    background: white !important;
-}
+
 .navbar.bg-light {
     background-color: #007bff!important;
 }

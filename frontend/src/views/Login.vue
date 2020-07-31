@@ -70,8 +70,9 @@ export default {
 </script>
 
 <style scoped>
-#app {
-  background: #248de6;
+.form-control {
+    border-radius: 100px !important;
+    background: white !important;
 }
 .login-page {
   margin: 0;

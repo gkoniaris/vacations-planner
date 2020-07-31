@@ -25,18 +25,18 @@ const routes = [{
         }
     },
     {
-        path: '/admin/users/:id',
-        name: 'Admin Edit Users',
-        component: UsersEdit,
+        path: '/admin/users/Create',
+        name: 'Admin Create Users',
+        component: UsersCreate,
         meta: {
             requiresAuth: true,
             role: 'supervisor'
         }
     },
     {
-        path: '/admin/users/Create',
-        name: 'Admin Create Users',
-        component: UsersCreate,
+        path: '/admin/users/:id',
+        name: 'Admin Edit Users',
+        component: UsersEdit,
         meta: {
             requiresAuth: true,
             role: 'supervisor'

@@ -1,42 +1,44 @@
 <template>
-    <div class="home">
-        <h2 class="mb-3">
-            Company users
-            <router-link to="/admin/users/create" class="btn btn-primary btn-sm float-right mt-2">New User</router-link>
-        </h2>
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-3">
+                Your Employees
+                <router-link to="/admin/users/create" class="btn btn-primary btn-sm float-right mt-2">New User</router-link>
+            </h2>
 
-        <table class="table table-hover table-sm">
-            <thead>
-                <th>
-                    Full name
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Type
-                </th>
-                <th>
-                    Actions
-                </th>
-            </thead>
-            <tbody>
-                <tr v-bind:key="employee.id" v-for="employee in employees">
-                    <td>
-                        {{employee.first_name}} {{employee.last_name}}
-                    </td>
-                    <td>
-                        {{employee.email}}
-                    </td>
-                    <td>
-                        {{employee.role === 'employee' ? 'Employee' : 'Supervisor'}}
-                    </td>
-                    <td>
-                        <router-link :to="'/admin/users/' + employee.id" class="btn btn-primary">Edit</router-link>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <th>
+                        Full name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </thead>
+                <tbody>
+                    <tr v-bind:key="employee.id" v-for="employee in employees">
+                        <td>
+                            {{employee.first_name}} {{employee.last_name}}
+                        </td>
+                        <td>
+                            {{employee.email}}
+                        </td>
+                        <td>
+                            {{employee.role === 'employee' ? 'Employee' : 'Supervisor'}}
+                        </td>
+                        <td>
+                            <router-link :to="'/admin/users/' + employee.id" class="btn btn-primary btn-sm">Edit</router-link>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 

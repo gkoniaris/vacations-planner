@@ -9,9 +9,9 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <!-- <li class="nav-item active">
               <router-link class="nav-link" to="/admin/users" v-if="role === 'supervisor'">Users</router-link>
-            </li>
+            </li> -->
             <li class="nav-item active">
               <router-link class="nav-link" to="/employee/applications" v-if="role === 'employee'">Applications</router-link>
             </li>
@@ -29,14 +29,14 @@
     </nav>
     <div class="left-navbar" v-if="isLogged">
         <router-link class="item" to="/admin/users" v-if="role === 'supervisor'">
-            <i class="fa fa-users pr-2" aria-hidden="true"></i> Employees <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>
+            <i class="fa fa-users pr-4" aria-hidden="true"></i> Employees <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>
         </router-link>
         <a class="item">
-            <i class="fa fa-calendar pr-2" aria-hidden="true"></i> Calendar <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>
+            <i class="fa fa-calendar pr-4" aria-hidden="true"></i> Calendar <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>
         </a>
     </div>
-    <div class="container mt-5">
-      <router-view class="mt-3"/>
+    <div class="main-body">
+      <router-view/>
     </div>
   </div>
 </template>
@@ -83,10 +83,10 @@ export default {
   }
   .left-navbar {
     position: fixed;
-    top: 57px;
+    top: 56px;
     left: 0;
     z-index: 1000;
-    background: #248de6;
+    background: #2d2d2d;
     width: 300px;
     height: 100%;
   }
@@ -101,11 +101,18 @@ export default {
     cursor: pointer;
   }
   .left-navbar .item.router-link-active {
-    color: #3e3e3e;
+    /* color: #3e3e3e; */
   }
   .left-navbar .item-arrow {
     position: absolute;
     right: 20px;
     top: 5px;
+  }
+  .main-body {
+    float: left;
+    width: calc(100% - 300px);
+    margin-left: 300px;
+    margin-top: 90px;
+    padding: 0 50px;
   }
 </style>
