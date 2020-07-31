@@ -8,7 +8,6 @@ class User extends BaseModel
 {
     protected $table = 'users';
 
-
     public function create($data)
     {
         try {

@@ -52,6 +52,7 @@ class User {
 
         return $user;
     }
+
     /**
      * Creates a new user
      * 
@@ -83,6 +84,9 @@ class User {
         return $user;
     }
 
+    /**
+     * Updates a user
+     */
     public function update($data)
     {
         Database::beginTransaction();
