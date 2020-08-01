@@ -231,11 +231,11 @@ export default {
       submitted: false,
       form: {
         user: {
-            email: 'koniaris.giwrgos@gmail.com',
-            first_name: 'George',
-            last_name: 'Koniaris',
-            password: 'password',
-            password_confirmation: 'password'
+            email: '',
+            first_name: '',
+            last_name: '',
+            password: '',
+            password_confirmation: ''
         },
         company: {
             name: '',
