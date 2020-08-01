@@ -75,7 +75,7 @@
                         </div>
                         
                         <div class="row">
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-6">
                                 <label>Role</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
@@ -87,10 +87,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-6">
                                 <label>Hired at</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
@@ -101,8 +98,10 @@
                             </div>
                         </div>
 
-                        <div class="btn btn-primary mt-3" @click="createEmployee()">
-                            Save employee
+                        <div class="text-center mt-3">
+                            <div class="btn btn-primary pl-5 pr-5" @click="createEmployee()">
+                                Save employee
+                            </div>
                         </div>
                     </div>
                 </form>
