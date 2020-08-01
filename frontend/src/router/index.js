@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import notifier from '../notifier'
 
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
+
 import UsersIndex from '../views/Admin/Users/Index.vue'
 import UsersCreate from '../views/Admin/Users/Create.vue'
 import UsersEdit from '../views/Admin/Users/Edit.vue'
@@ -14,6 +16,11 @@ const routes = [{
         path: '/',
         name: 'Login',
         component: Login
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register
     },
     {
         path: '/admin/users',
@@ -79,7 +86,7 @@ router.beforeEach((to, from, next) => {
         if (localStorage.getItem('role') === 'supervisor') return next({ name: 'Admin Index Users' })
     }
 
-    if (to.name !== 'Login' && !localStorage.getItem('isLogged')) return next({ name: 'Login' })
+    if ((to.name !== 'Login' && to.name !== 'Register') && !localStorage.getItem('isLogged')) return next({ name: 'Login' })
 
     if (to.meta.role && localStorage.getItem('role') !== to.meta.role) return next({ name: 'Login' })
 

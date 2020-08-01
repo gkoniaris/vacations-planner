@@ -18,5 +18,8 @@
   },
   "homepage": "https://github.com/gkoniaris/vacation-planner#readme",
   "description": "",
-  "dependencies": {}
+  "dependencies": {
+    "node-sass": "^4.14.1",
+    "sass": "^1.26.10"
+  }
 }

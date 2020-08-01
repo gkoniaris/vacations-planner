@@ -9,15 +9,15 @@
                   <div class="card-block px-2 text-center mt-3 pr-5 pl-5">
                       <h4 class="card-title">WELCOME BACK</h4>
                       <form>
-                      <div class="form-group">
-                        <input placeholder="Enter your email" v-model="email" class="form-control" type="email" />
-                      </div>
-                      <div class="form-group">
-                        <input placeholder="Enter your password" v-model="password" class="form-control" type="password" />
-                      </div>
-                      <div class="btn btn-primary btn-block float-right" @click="login()">LOGIN</div>
-                      <div>Don't have an account yet? <router-link to="/">Register now</router-link>.</div>
-                    </form>
+                        <div class="form-group">
+                          <input placeholder="Enter your email" v-model="email" class="form-control" type="email" />
+                        </div>
+                        <div class="form-group">
+                          <input placeholder="Enter your password" v-model="password" class="form-control" type="password" />
+                        </div>
+                        <div class="btn btn-primary btn-block float-right" @click="login()">LOGIN</div>
+                        <div>Don't have an account yet? <router-link to="/register">Register now</router-link>.</div>
+                      </form>
                   </div>
               </div>
           </div>

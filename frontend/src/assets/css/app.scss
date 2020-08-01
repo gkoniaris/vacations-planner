@@ -1,0 +1,85 @@
+@import './variables.scss';
+@import './toaster.scss';
+
+body {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+input::placeholder {
+    color: $placeholder;
+    font-size: 14px;
+    font-weight: 300;
+}
+select.form-control {
+    color: $placeholder;
+    font-size: 14px;
+    font-weight: 300;
+}
+.error {
+    color: $danger;
+    font-weight: 300;
+    font-size: 14px;
+}
+.navbar.bg-light {
+    background-color: $primary !important;
+}
+
+.navbar.bg-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+    color: $primary-text;
+}
+
+.input-group-addon {
+    width: 40px;
+    padding-top: 8px;
+    text-align: center;
+    background: $primary;
+    color: $primary-text;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.left-navbar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    z-index: 1000;
+    background: #2d2d2d;
+    width: 300px;
+    height: 100%;
+}
+
+.left-navbar .item {
+    padding-left: 35px;
+    margin-top: 40px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.left-navbar .item.router-link-active {
+    /* color: #3e3e3e; */
+}
+
+.left-navbar .item-arrow {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+}
+
+.main-body {
+    float: left;
+    width: 100%;
+    margin-top: 90px;
+    padding: 0 50px;
+}
+
+.is-logged .main-body {
+    margin-left: 300px;
+    width: calc(100% - 300px);
+}

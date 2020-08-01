@@ -77,46 +77,6 @@ export default {
 }
 </script>
 
-<style>
-  .cursor-pointer {
-    cursor: pointer;
-  }
-  .left-navbar {
-    position: fixed;
-    top: 56px;
-    left: 0;
-    z-index: 1000;
-    background: #2d2d2d;
-    width: 300px;
-    height: 100%;
-  }
-  .left-navbar .item {
-    padding-left: 35px;
-    margin-top: 40px;
-    padding-bottom: 10px;
-    font-weight: bold;
-    color: white;
-    position: relative;
-    display: block;
-    cursor: pointer;
-  }
-  .left-navbar .item.router-link-active {
-    /* color: #3e3e3e; */
-  }
-  .left-navbar .item-arrow {
-    position: absolute;
-    right: 20px;
-    top: 5px;
-  }
-  .main-body {
-    float: left;
-    width: 100%;
-    margin-top: 90px;
-    padding: 0 50px;
-  }
-
-  .is-logged .main-body {  
-    margin-left: 300px;
-    width: calc(100% - 300px);
-  }
+<style lang="scss">
+@import "@/assets/css/app.scss";
 </style>
