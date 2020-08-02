@@ -10,6 +10,7 @@ abstract class BaseModel implements BaseModelInterface
     protected $joins = [];
     protected $limit = null;
     protected $data = [];
+    protected $fillable = [];
 
     public function __construct()
     {
@@ -27,6 +28,12 @@ abstract class BaseModel implements BaseModelInterface
 
         return $placeholders;
     } 
+
+    public function set($field, $value)
+    {
+        $this->{$field} = $value;
+        $this->data[$field] = $value;
+    }
 
     public function all()
     {
@@ -52,8 +59,10 @@ abstract class BaseModel implements BaseModelInterface
 
     public function fill($data) 
     {
-        foreach($data as $key => $value) {
-            $this->data[$key] = $value;
+        foreach($data as $field => $value) {
+            if (!in_array($field, $this->fillable)) continue;
+            $this->{$field} = $value;
+            $this->data[$field] = $value;
         }
 
         return $this;

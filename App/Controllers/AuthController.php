@@ -6,6 +6,7 @@ use App\Services\UserService;
 use App\Singletons\Request;
 use App\Singletons\Response;
 use App\Validators\LoginValidator;
+use App\Validators\RegisterValidator;
 
 class AuthController extends BaseController
 {
@@ -35,5 +36,27 @@ class AuthController extends BaseController
         $responseData = ['message' => 'You have been successfully logged in', 'user' => $user];
             
         return Response::json($responseData);
+    }
+
+    public function register()
+    {
+        $data = Request::data();
+
+        $validated = RegisterValidator::validate($data);
+
+        if ($validated !== true) return Response::json(['message' => $validated], 400);
+
+        $user = UserService::register($data->user, $data->company);
+
+        if (!$user) {
+            $responseData = ['message' => 'User not created'];
+
+            return Response::json($responseData, 400);
+        }
+
+        $responseData = ['message' => 'You have been successfully logged in', 'user' => $user];
+            
+        return Response::json($responseData);
+
     }
 }

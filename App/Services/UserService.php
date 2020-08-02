@@ -5,12 +5,34 @@ use App\Singletons\Database;
 use App\Classes\Helpers;
 use App\FunctionalException;
 use App\Models\User as UserModel;
+use App\Models\Company as CompanyModel;
 
 class UserService {
 
     public function __construct(){
         $this->user = new UserModel();
     }    
+
+    public static function register($userData, $companyData)
+    {
+        $salt = Helpers::randomString();
+        $hashedPassword = hash('sha256' , $salt . '.' . $userData->password);
+
+        $company = new CompanyModel();
+        $company->fill($companyData);
+        $company = $company->save();
+
+
+        $user = new UserModel();
+        $user->fill($userData);
+        $user->set('company_id', $company->id);
+        $user->set('password', $hashedPassword);
+        $user->set('salt', $salt);
+        $user->set('role', 'supervisor');
+        $user->save();
+
+        return $user;
+    }
 
     /**
      * Performs login and creates a session for the user

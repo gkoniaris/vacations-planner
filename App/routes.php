@@ -6,6 +6,9 @@ $router = Router::getInstance();
 $router->get('App\Controllers\IndexController@index', '/');
 
 $router->post('App\Controllers\AuthController@login', '/api/login');
+$router->post('App\Controllers\AuthController@register', '/api/register');
+
+$router->get('App\Controllers\IndustryController@index', '/api/taxonomies/industries');
 
 $router->get('App\Controllers\UserController@get', '/api/users', ['App\Middlewares\Authenticated', 'App\Middlewares\IsSupervisor']);
 $router->post('App\Controllers\UserController@create', '/api/users', ['App\Middlewares\Authenticated', 'App\Middlewares\IsSupervisor']);

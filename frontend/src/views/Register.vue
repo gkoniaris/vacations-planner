@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="error" v-if="submitted && $v.form.user.password_confirmation.$error">Password and password confirmation don't match.</div>
                             </div>
-                            <div class="btn btn-primary float-right mt-5" @click="nextStep()">Next step</div>
+                            <div class="btn btn-primary float-right mt-5" @click="nextStep()">Next step <i class="pl-2 fa fa-arrow-right"/></div>
                         </div>
                     </div>
                     <div ref="company form" class="col-xl-8 offset-xl-2" v-if="step === 2">
@@ -147,7 +147,7 @@
                                         placeholder="Select an industry"
                                     >
                                         <option value="-1" disabled selected>Select an industry</option>
-                                        <option value="1">Software</option>
+                                        <option :key="industry.id" v-for="industry in industries" :value="industry.id">{{industry.name}}</option>
                                     </select>
                                 </div>
                                 <div class="error" v-if="submitted && $v.form.company.industry_id.$error">Please select a valid industry.</div>
@@ -160,8 +160,15 @@
                                             <i class="fa fa-globe" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Enter the country where your company is located">
+                                    <input 
+                                        v-model="$v.form.company.country.$model" 
+                                        type="email"
+                                        class="form-control" 
+                                        :class="{ 'is-invalid': submitted && $v.form.company.country.$error }"
+                                        placeholder="Enter your company's name"
+                                    >
                                 </div>
+                                <div class="error" v-if="submitted && $v.form.company.country.$error">Please enter a valid country.</div>
                             </div>
                             <div class="form-group">
                                 <label>City</label>
@@ -171,8 +178,15 @@
                                             <i class="fa fa-map-marker" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Enter the city where your company is located">
+                                    <input 
+                                        v-model="$v.form.company.city.$model" 
+                                        type="email"
+                                        class="form-control" 
+                                        :class="{ 'is-invalid': submitted && $v.form.company.city.$error }"
+                                        placeholder="Enter your company's name"
+                                    >
                                 </div>
+                                <div class="error" v-if="submitted && $v.form.company.city.$error">Please enter a valid city.</div>
                             </div>
                             <div class="form-group">
                                 <label>Vat</label>
@@ -182,8 +196,15 @@
                                             <i class="fa fa-money" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Enter the company's VAT">
+                                    <input 
+                                        v-model="$v.form.company.vat.$model" 
+                                        type="email"
+                                        class="form-control" 
+                                        :class="{ 'is-invalid': submitted && $v.form.company.vat.$error }"
+                                        placeholder="Enter your company's name"
+                                    >
                                 </div>
+                                <div class="error" v-if="submitted && $v.form.company.vat.$error">Please enter a valid VAT.</div>
                             </div>
                             <div class="form-group pt-2">
                                 <label>Total employees</label>
@@ -193,18 +214,53 @@
                                             <i class="fa fa-users" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <select class="form-control">
-                                        <option selected disabled=true>How many employees does your company employ?</option>
-                                        <option>1 - 9</option>
-                                        <option>10 - 50</option>
-                                        <option>51 - 200</option>
-                                        <option>201 - 1000</option>
-                                        <option>1001+</option>
+                                    <select 
+                                        v-model="$v.form.company.total_employees.$model" 
+                                        class="form-control"
+                                        :class="{ 'is-invalid': submitted && $v.form.company.total_employees.$error }"
+                                    >
+                                        <option selected disabled=true value="-1">How many employees does your company employ?</option>
+                                        <option value="1 - 9">1 - 9</option>
+                                        <option value="10 - 50">10 - 50</option>
+                                        <option value="51 - 200">51 - 200</option>
+                                        <option value="201 - 1000">201 - 1000</option>
+                                        <option value="1000+">1000+</option>
                                     </select>
                                 </div>
+                                <div class="error" v-if="submitted && $v.form.company.total_employees.$error">Please select how many employees your company has.</div>
                             </div>
-                            <div class="btn btn-primary float-left mt-5" @click="step = 2">Previous step</div>
-                            <div class="btn btn-primary float-right mt-5" @click="nextStep()">Next step</div>
+                            <div class="btn btn-primary float-left mt-5" @click="previousStep()"><i class="pr-2 fa fa-arrow-left"/> Previous step</div>
+                            <div class="btn btn-primary float-right mt-5" @click="nextStep()">Next step <i class="pl-2 fa fa-arrow-right"/></div>
+                        </div>
+                    </div>
+                    <div ref="company form" class="col-xl-8 offset-xl-2" v-if="step === 3">
+                        <h5 class="mt-3 mb-3">Your feedback is valuable</h5>
+                        <div class="form-form pt-3">
+                            <div class="form-group">
+                                <label>Where did you hear about vacation planner?</label>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-users" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <select 
+                                        v-model="feedback.from" 
+                                        class="form-control"
+                                        :class="{ 'is-invalid': submitted && $v.form.company.total_employees.$error }"
+                                    >
+                                        <option selected disabled=true value="-1">Select a source</option>
+                                        <option value="github">Github</option>
+                                        <option value="linkedin">Linkedin</option>
+                                        <option value="linkedin">Dev.to</option>
+                                        <option value="linkedin">My blog</option>
+                                        <option value="linkedin">Other</option>
+                                    </select>
+                                </div>
+                                <div class="error" v-if="submitted && $v.form.company.name.$error">Please enter a valid company name.</div>
+                            </div>
+                            <div class="btn btn-primary float-left mt-5" @click="previousStep()"><i class="pr-2 fa fa-arrow-left"/> Previous step</div>
+                            <div class="btn btn-success float-right mt-5" @click="register()">Finish registration</div>
                         </div>
                     </div>
                 </div>
@@ -215,8 +271,8 @@
 </template>
 
 <script>
-// import http from '../http'
-// import notifier from '../notifier'
+import http from '../http'
+import notifier from '../notifier'
 // import {EventBus} from '../eventbus'
 import { required, email, minValue } from 'vuelidate/lib/validators'
 
@@ -228,7 +284,11 @@ export default {
   data() {
     return {
       step: 1,
+      industries: [],
       submitted: false,
+      feedback: {
+          from: -1
+      },
       form: {
         user: {
             email: '',
@@ -242,7 +302,7 @@ export default {
             industry_id: -1,
             country: '',
             city: '',
-            total_employees: null,
+            total_employees: -1,
             vat: ''
         }
       }
@@ -291,7 +351,15 @@ export default {
       }
     }
   },
+  mounted() {
+    this.getIndustries()
+  },
   methods: {
+    async getIndustries() {
+        const industries = await http.get('/api/taxonomies/industries')
+
+        this.industries = industries.data
+    },
     nextStep() {
         if (this.step === 1) {
             this.submitted = true
@@ -316,7 +384,7 @@ export default {
             this.$v.$touch()
 
             const validated = !this.$v.form.company.name.$invalid 
-            && !this.$v.form.company.industry.$invalid 
+            && !this.$v.form.company.industry_id.$invalid 
             && !this.$v.form.company.country.$invalid 
             && !this.$v.form.company.city.$invalid 
             && !this.$v.form.company.total_employees.$invalid
@@ -329,7 +397,22 @@ export default {
             this.$v.$reset()
             return this.step++
         }
-
+    },
+    previousStep() {
+        this.step--
+    },
+    register() {
+      http.post('/api/register', {
+        user: this.form.user,
+        company: this.form.company
+      }, { withCredentials: true })
+      .then(response => {
+        notifier.success('You have successfully registered')
+        this.$router.push('/login')
+      })
+      .catch((err) => {
+        notifier.alert(err.response.data.message)
+      })
     }
   }
 }

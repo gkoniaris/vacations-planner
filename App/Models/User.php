@@ -7,6 +7,11 @@ use App\Singletons\Database;
 class User extends BaseModel
 {
     protected $table = 'users';
+    protected $fillable = [
+        'email',
+        'first_name',
+        'last_name'
+    ];
 
     public function create($data)
     {
@@ -17,14 +22,14 @@ class User extends BaseModel
     
             if ($user->role === 'employee') {
                 Database::insert('INSERT INTO pto(employee_id, remaining_days) VALUES(?, ?)', [$user->id, 21]);
+                
+                // Database::insert('INSERT INTO supervisor_employee(employee_id, supervisor_id) 
+                // VALUES(?, ?)', [
+                //     $user->id,
+                //     1
+                //     ]);
             }
-    
-            Database::insert('INSERT INTO supervisor_employee(employee_id, supervisor_id) 
-                VALUES(?, ?)', [
-                    $user->id,
-                    1
-                ]);
-    
+                    
             Database::commit();
 
             return $user;
