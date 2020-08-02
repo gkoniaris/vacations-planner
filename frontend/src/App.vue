@@ -1,6 +1,6 @@
 <template>
   <div id="app" v-bind:class="{'is-logged': isLogged}">
-    <nav v-if="role === 'supervisor' || role === 'employee'" class="navbar navbar-expand-lg fixed-top bg-white">
+    <nav v-if="role === 'supervisor' || role === 'employee'" class="navbar navbar-expand-lg fixed-top">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -35,12 +35,12 @@
               <img src="./assets/images/avatar.png"/>
             </div>
             <div class="welcome-back">
-              <h5 class="mt-4 mb-3 text-dark">Welcome back, {{user.name}}</h5>
+              <h5 class="mt-5 mb-3 text-dark">Welcome back, {{user.name}}</h5>
             </div>
         </div>
         <div class="text-left">
           <router-link class="item" to="/admin/users" v-if="role === 'supervisor'">
-              <i class="fa fa-users pr-4" aria-hidden="true"></i> Dashboard <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>
+              <i class="fa fa-dashboard pr-4" aria-hidden="true"></i> Dashboard <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>
           </router-link>
           <a class="item">
               <i class="fa fa-calendar pr-4" aria-hidden="true"></i> Calendar <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>

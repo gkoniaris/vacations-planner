@@ -116,7 +116,7 @@ export default {
 
 <style scoped>
 .card {
-    border-radius: 10px;
+    border-radius: 0;
     border: 0;
 }
 .card-body {
