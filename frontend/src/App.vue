@@ -1,8 +1,7 @@
 <template>
   <div id="app" v-bind:class="{'is-logged': isLogged}">
-    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+    <nav v-if="role === 'supervisor' || role === 'employee'" class="navbar navbar-expand-lg fixed-top bg-white">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/"><i class="fa fa-plane pr-3" aria-hidden="true"></i> Vacation planner</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,13 +26,26 @@
         </div>
       </div>
     </nav>
-    <div class="left-navbar" v-if="isLogged">
-        <router-link class="item" to="/admin/users" v-if="role === 'supervisor'">
-            <i class="fa fa-users pr-4" aria-hidden="true"></i> Employees <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>
-        </router-link>
-        <a class="item">
-            <i class="fa fa-calendar pr-4" aria-hidden="true"></i> Calendar <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>
+    <div class="left-navbar text-center text-white" v-if="isLogged">
+        <a class="navbar-brand text-white mt-2" href="/">
+          <h4>Vacation planner</h4>
         </a>
+        <div class="profile-container pt-4 pb-4 bg-white">
+            <div class="mt-4 profile-picture">
+              <img src="./assets/images/avatar.png"/>
+            </div>
+            <div class="welcome-back">
+              <h5 class="mt-4 mb-3 text-dark">Welcome back, {{user.name}}</h5>
+            </div>
+        </div>
+        <div class="text-left">
+          <router-link class="item" to="/admin/users" v-if="role === 'supervisor'">
+              <i class="fa fa-users pr-4" aria-hidden="true"></i> Dashboard <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>
+          </router-link>
+          <a class="item">
+              <i class="fa fa-calendar pr-4" aria-hidden="true"></i> Calendar <i class="fa fa-chevron-right item-arrow" aria-hidden="true"></i>
+          </a>
+        </div>
     </div>
     <div class="main-body">
       <router-view/>
@@ -51,6 +63,9 @@ export default {
   },
   data() {
     return {
+      user: {
+        name: 'Liza'
+      },
       isLogged: false,
       role: null
     }

@@ -3,6 +3,17 @@
 
 body {
     font-family: 'Montserrat', sans-serif !important;
+    background: rgb(232,232,232);
+}
+
+.bg-purple {
+    background: $purple;
+}
+.bg-red {
+    background: $red;
+}
+.bg-green {
+    background: $green;
 }
 
 input::placeholder {
@@ -20,13 +31,19 @@ select.form-control {
     font-weight: 300;
     font-size: 14px;
 }
-.navbar.bg-light {
-    background-color: $primary !important;
+.breadcrumb {
+    padding-top: 15px;
 }
-
-.navbar.bg-light .navbar-brand,
-.navbar-light .navbar-nav .nav-link {
-    color: $primary-text;
+.breadcrumb-item {
+    color: black !important;
+}
+.navbar {
+    box-shadow: 4px 2px 7px 0 $secondary;
+    color: black;
+    padding: 8px 80px 9px 80px;
+}
+.fa-3 {
+    font-size: 3em;
 }
 
 .input-group-addon {
@@ -43,9 +60,9 @@ select.form-control {
 
 .left-navbar {
     position: fixed;
-    top: 56px;
+    top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 1000000;
     background: #2d2d2d;
     width: 300px;
     height: 100%;
@@ -55,7 +72,7 @@ select.form-control {
     padding-left: 35px;
     margin-top: 40px;
     padding-bottom: 10px;
-    font-weight: bold;
+    font-weight: 200;
     color: white;
     position: relative;
     display: block;
@@ -72,14 +89,35 @@ select.form-control {
     top: 5px;
 }
 
+.navbar-brand {
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 0;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+    width: 100%;
+    height: 49px;
+}
 .main-body {
     float: left;
     width: 100%;
     margin-top: 90px;
-    padding: 0 50px;
+    padding: 0 100px;
 }
 
 .is-logged .main-body {
     margin-left: 300px;
     width: calc(100% - 300px);
+}
+.dashboard {
+    .box {
+        background: white;
+        padding: 20px;
+    }
+    .header {
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
 }

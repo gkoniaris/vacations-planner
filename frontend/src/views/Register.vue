@@ -265,6 +265,10 @@
                     </div>
                 </div>
             </form>
+            <div class="card-footer">
+                <div class="text-center mb-3 mt-3">You have already created an account? <router-link to="/login">Login now</router-link>.</div>
+            </div>
+
         </div>   
     </div>
   </div>
