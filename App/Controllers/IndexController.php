@@ -7,7 +7,6 @@ use App\Core\Singletons\Response;
 
 class IndexController extends BaseController
 {
-
     public function index()
     {
         Response::json(['status' => 'ok']);

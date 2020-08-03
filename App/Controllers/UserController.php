@@ -47,14 +47,16 @@ class UserController extends BaseController
             
             $validated = UserCreateValidator::validate($data);
 
-            if ($validated !== true) return Response::json(['message' => $validated], 400);
+            if ($validated !== true) {
+                return Response::json(['message' => $validated], 400);
+            }
 
             $user = $this->user->create($data);
 
-            return Response::json($user);  
-        } catch(FunctionalException $e) {
+            return Response::json($user);
+        } catch (FunctionalException $e) {
             return Response::json(['message' => $e->getMessage()], 400);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return Response::json(['message' => 'Something went wrong'], 500);
         }
     }
@@ -66,14 +68,16 @@ class UserController extends BaseController
 
             $validated = UserUpdateValidator::validate($data);
 
-            if ($validated !== true) return Response::json(['message' => $validated], 400);
+            if ($validated !== true) {
+                return Response::json(['message' => $validated], 400);
+            }
 
             $user = $this->user->update($data);
 
-            return Response::json($user);  
-        } catch(FunctionalException $e) {
+            return Response::json($user);
+        } catch (FunctionalException $e) {
             return Response::json(['message' => $e->getMessage()], 400);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return Response::json(['message' => 'Something went wrong'], 500);
         }
     }

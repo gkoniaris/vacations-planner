@@ -3,8 +3,8 @@ namespace App\Core\Singletons;
 
 use App\Core\Patterns\Singleton;
 
-class Response extends Singleton{
-
+class Response extends Singleton
+{
     protected static $instance;
 
     /**

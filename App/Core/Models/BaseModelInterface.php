@@ -4,7 +4,6 @@ namespace App\Core\Models;
 
 interface BaseModelInterface
 {
-    
     public function find($id);
 
     public function all();
@@ -16,5 +15,4 @@ interface BaseModelInterface
     public function where($field, $equalityOperator, $data);
 
     public function get();
-
 }

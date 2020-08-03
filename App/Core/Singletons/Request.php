@@ -16,7 +16,8 @@ class Request extends Singleton
     /**
      * Request constructor.
      */
-    protected function __construct(){
+    protected function __construct()
+    {
         $this->data = [];
         $this->query = [];
         $this->method = $_SERVER['REQUEST_METHOD'];
@@ -88,12 +89,12 @@ class Request extends Singleton
             /**
              * Handle 404 errors
              */
-            if(!$route) {
+            if (!$route) {
                 $cors = new Cors(Request::getInstance());
 
                 // Don't return 404 for options requests
                 if ($this->method === 'OPTIONS') {
-                    exit(0);    
+                    exit(0);
                 }
 
                 header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
@@ -106,8 +107,7 @@ class Request extends Singleton
 
             $parametersToInject = [];
 
-            foreach($parameters as $parameter)
-            {
+            foreach ($parameters as $parameter) {
                 $classObject = $parameter->getClass();
 
                 if ($classObject->isInstantiable()) {
@@ -119,12 +119,12 @@ class Request extends Singleton
             
             $controller = new $route['controller'](...$parametersToInject);
 
-            foreach($route['middlewares'] as $middleware) {
+            foreach ($route['middlewares'] as $middleware) {
                 new $middleware(Request::getInstance());
             }
 
             $controller->{$route['method']}();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->terminateRequestWithException($e);
         }
     }
@@ -136,7 +136,9 @@ class Request extends Singleton
     {
         $uri = $_SERVER['REQUEST_URI'];
 
-        if (strstr($uri, '?')) $uri = substr($uri, 0, strpos($uri, '?'));
+        if (strstr($uri, '?')) {
+            $uri = substr($uri, 0, strpos($uri, '?'));
+        }
         $uri = '/' . trim($uri, '/');
 
         return $uri;
@@ -153,7 +155,7 @@ class Request extends Singleton
                 $this->query = (object) $this->query;
             }
 
-            switch($this->method) {
+            switch ($this->method) {
                 case $this->method === 'POST' || $this->method === 'PUT':
                     $data = file_get_contents('php://input');
                     if ($data) {
@@ -168,8 +170,7 @@ class Request extends Singleton
 
                     break;
             }
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->terminateRequestWithException($e);
         }
     }

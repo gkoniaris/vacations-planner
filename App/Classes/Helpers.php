@@ -2,11 +2,12 @@
 
 namespace App\Classes;
 
-class Helpers {
+class Helpers
+{
 
     /**
      * Validates a date and returns true if valid, false if not
-     * 
+     *
      * @param $date
      * @param $format
      */
@@ -17,9 +18,9 @@ class Helpers {
         return $d && $d->format($format) === $date;
     }
 
-    /** 
-     * Generates a random string of specified length 
-     * 
+    /**
+     * Generates a random string of specified length
+     *
      * @param $length
      */
     public static function randomString($length = 20)

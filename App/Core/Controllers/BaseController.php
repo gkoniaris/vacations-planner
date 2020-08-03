@@ -2,8 +2,8 @@
 
 namespace App\Core\Controllers;
 
-abstract class BaseController{
-
+abstract class BaseController
+{
     protected $data;
 
     public function __construct($data)

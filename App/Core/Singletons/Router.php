@@ -3,8 +3,8 @@ namespace App\Core\Singletons;
 
 use App\Core\Patterns\Singleton;
 
-class Router extends Singleton{
-
+class Router extends Singleton
+{
     protected static $instance;
     protected $routes;
     protected $request;
@@ -19,7 +19,7 @@ class Router extends Singleton{
 
     /**
      * Creates a post route and inject into the router
-     * 
+     *
      * @param $controllerText
      * @param $uri
      * @param $middlewares
@@ -31,7 +31,7 @@ class Router extends Singleton{
 
     /**
      * Creates a get route and inject into the router
-     * 
+     *
      * @param $controllerText
      * @param $uri
      * @param $middlewares
@@ -41,9 +41,9 @@ class Router extends Singleton{
         $this->initializeRouterItem($controllerText, $uri, $middlewares, 'GET');
     }
 
-        /**
+    /**
      * Creates a get route and inject into the router
-     * 
+     *
      * @param $controllerText
      * @param $uri
      * @param $middlewares
@@ -55,14 +55,16 @@ class Router extends Singleton{
 
     /**
      * Checks if a given route exists based on their uri and method
-     * 
+     *
      * @param $uri
      * @param $method
      */
     public function findRouteInstance($uri, $method)
     {
-        foreach($this->routes as $route) {
-            if ($route['uri'] === $uri && $route['httpMethod'] === $method) return $route;
+        foreach ($this->routes as $route) {
+            if ($route['uri'] === $uri && $route['httpMethod'] === $method) {
+                return $route;
+            }
         }
         
         return false;
@@ -71,7 +73,8 @@ class Router extends Singleton{
     /**
      * Returns the router instance (Singleton specific class)
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (!isset(static::$instance)) {
             static::$instance = new static();
         }
@@ -81,7 +84,7 @@ class Router extends Singleton{
 
     /**
      * Initializes a router url, injects middlewares and adds to the rouer instance
-     * 
+     *
      * @param $controllerText
      * @param $uri
      * @param $middlewares
@@ -100,7 +103,7 @@ class Router extends Singleton{
 
     /**
      * Returns the name of the controller, which is the part before the @
-     * 
+     *
      * @param $controllerText
      */
     private function getControllerName($controllerText)
@@ -112,7 +115,7 @@ class Router extends Singleton{
 
     /**
      * Returns the method / function of the controller, which is the part after the @
-     * 
+     *
      * @param $controllerText
      */
     private function getControllerMethod($controllerText)
@@ -124,22 +127,25 @@ class Router extends Singleton{
 
     /**
      * Injects the middlewares in to the current request
-     * 
+     *
      * @param $middlewares
      * @param $method
      */
     private function injectMiddlewares(&$middlewares, $method)
     {
-        try{
+        try {
             foreach ($middlewares as $middleware) {
                 $class = class_exists($middleware);
-                if (!$class) throw new \Exception('Invalid middleware class');
+                if (!$class) {
+                    throw new \Exception('Invalid middleware class');
+                }
                 
                 $middlewareClass = is_subclass_of($middleware, 'App\Core\Middlewares\BaseMiddleware');
-                if (!$middlewareClass) throw new \Exception('Middlewares must extend BaseMiddleware class');
+                if (!$middlewareClass) {
+                    throw new \Exception('Middlewares must extend BaseMiddleware class');
+                }
             }
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             Request::getInstance()->terminateRequestWithException($e);
         }
     }

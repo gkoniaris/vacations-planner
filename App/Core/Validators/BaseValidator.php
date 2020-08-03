@@ -2,8 +2,8 @@
 
 namespace App\Validators;
 
-abstract class BaseValidator {
-
+abstract class BaseValidator
+{
     public static function validate($data)
     {
         return false;

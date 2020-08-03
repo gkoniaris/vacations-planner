@@ -4,8 +4,8 @@ namespace App\Middlewares;
 use App\Core\Middlewares\BaseMiddleware;
 use App\Core\Singletons\Request;
 
-class IsEmployee extends BaseMiddleware{
-
+class IsEmployee extends BaseMiddleware
+{
     protected $request;
     
     public function __construct(Request $request)
@@ -22,7 +22,7 @@ class IsEmployee extends BaseMiddleware{
         $user = $this->request->user();
 
         if ($user['role'] !== 'employee') {
-            if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
                 $this->request->terminateRequestWithException(new \Exception('Unauthorized'), 403);
             }
 

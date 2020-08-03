@@ -23,7 +23,7 @@ class User extends BaseModel
             if ($user->role === 'employee') {
                 Database::insert('INSERT INTO pto(employee_id, remaining_days) VALUES(?, ?)', [$user->id, 21]);
                 
-                // Database::insert('INSERT INTO supervisor_employee(employee_id, supervisor_id) 
+                // Database::insert('INSERT INTO supervisor_employee(employee_id, supervisor_id)
                 // VALUES(?, ?)', [
                 //     $user->id,
                 //     1
@@ -33,7 +33,7 @@ class User extends BaseModel
             Database::commit();
 
             return $user;
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Database::rollback();
 
             throw $e;

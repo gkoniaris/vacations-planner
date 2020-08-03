@@ -7,13 +7,13 @@ use PHPMailer\PHPMailer\Exception;
 
 /**
  * Mailer allows email sending through an SMTP server
- * 
+ *
  * It uses the fluent interface design pattern, so you can build
  * emails by chaining functions and when finished building the email,
  * you just call the send function
- * 
+ *
  * Example usage:
- * 
+ *
  * $mailer = new Mailer();
  * $mailer->from('myemail@test.com')
  *        ->to('anotheremail@test.com')
@@ -21,8 +21,8 @@ use PHPMailer\PHPMailer\Exception;
  *        ->text('Please check the report I sent you')
  *        ->send();
  */
-class Mailer {
-
+class Mailer
+{
     protected $mail;
     protected $mergeTags;
     
@@ -52,13 +52,15 @@ class Mailer {
 
     /**
      * Sets the email sender
-     * 
+     *
      * @param $email
      * @param $name
      */
     public function from($email, $name)
     {
-        if (!$email || !$name) throw new \Exception('Please provide a valid email and name for the sender');
+        if (!$email || !$name) {
+            throw new \Exception('Please provide a valid email and name for the sender');
+        }
 
         $this->mail->From = $email;
         $this->mail->FromName = $name;
@@ -68,13 +70,15 @@ class Mailer {
 
     /**
      * Sets an email recipient. Can be called multiple times
-     * 
+     *
      * @param $email
      * @param $name
      */
     public function to($email, $name)
     {
-        if (!$email) throw new \Exception('Please provide a valid email and name for the recipient');
+        if (!$email) {
+            throw new \Exception('Please provide a valid email and name for the recipient');
+        }
         
         $this->mail->addAddress($email, $name);
 
@@ -83,7 +87,7 @@ class Mailer {
 
     /**
      * Sets the email subject
-     * 
+     *
      * @param $text
      */
     public function subject($text)
@@ -98,7 +102,7 @@ class Mailer {
      * original content and the alternative content of the email.
      * mergeTags function should be called before the view, text or
      * altText functions.
-     * 
+     *
      * @param $tags
      */
     public function mergeTags($tags)
@@ -113,7 +117,7 @@ class Mailer {
      * Pass the view in the following format: 'mail.reports.report1'
      * where mail/reports/report1.php is a file located inside
      * the views folder
-     * 
+     *
      * @params $view
      */
     public function view($view)
@@ -133,7 +137,7 @@ class Mailer {
 
     /**
      * Sets the email body when using plain text
-     * 
+     *
      * @params $text
      */
     public function text($text)
@@ -151,7 +155,7 @@ class Mailer {
 
     /**
      * Sets an alternative body for the email when using a view
-     * 
+     *
      * @params $text
      */
     public function altText($text)

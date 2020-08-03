@@ -7,7 +7,5 @@ namespace App\Core\Middlewares;
  */
 interface BaseMiddlewareInterface
 {
-
     public function handle();
-
 }

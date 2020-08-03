@@ -24,7 +24,9 @@ class AuthController extends BaseController
         
         $validated = LoginValidator::validate($data);
 
-        if ($validated !== true) return Response::json(['message' => $validated], 400);
+        if ($validated !== true) {
+            return Response::json(['message' => $validated], 400);
+        }
 
         $user = $this->user->login($data);
 
@@ -45,7 +47,9 @@ class AuthController extends BaseController
 
         $validated = RegisterValidator::validate($data);
 
-        if ($validated !== true) return Response::json(['message' => $validated], 400);
+        if ($validated !== true) {
+            return Response::json(['message' => $validated], 400);
+        }
 
         $user = UserService::register($data->user, $data->company);
 
@@ -58,6 +62,5 @@ class AuthController extends BaseController
         $responseData = ['message' => 'You have been successfully logged in', 'user' => $user];
             
         return Response::json($responseData);
-
     }
 }

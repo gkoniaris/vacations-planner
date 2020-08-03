@@ -3,8 +3,8 @@ namespace App\Services;
 
 use App\Models\Industry as IndustryModel;
 
-class IndustryService {
-
+class IndustryService
+{
     public function __construct()
     {
         $this->industry = new IndustryModel();
@@ -14,5 +14,4 @@ class IndustryService {
     {
         return $this->industry->all();
     }
-
 }

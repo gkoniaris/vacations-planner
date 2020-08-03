@@ -7,16 +7,17 @@ use App\Core\Exceptions\FunctionalException;
 use App\Models\User as UserModel;
 use App\Models\Company as CompanyModel;
 
-class UserService {
-
-    public function __construct(){
+class UserService
+{
+    public function __construct()
+    {
         $this->user = new UserModel();
-    }    
+    }
 
     public static function register($userData, $companyData)
     {
         $salt = Helpers::randomString();
-        $hashedPassword = hash('sha256' , $salt . '.' . $userData->password);
+        $hashedPassword = hash('sha256', $salt . '.' . $userData->password);
 
         $company = new CompanyModel();
         $company->fill($companyData);
@@ -36,7 +37,7 @@ class UserService {
 
     /**
      * Performs login and creates a session for the user
-     * 
+     *
      * @param $data
      */
     public function login($data)
@@ -77,13 +78,13 @@ class UserService {
 
     /**
      * Creates a new user
-     * 
+     *
      * @param $data
      */
     public function create($data)
     {
         $salt = Helpers::randomString();
-        $hashedPassword = hash('sha256' , $salt . '.' . Helpers::randomString(30));
+        $hashedPassword = hash('sha256', $salt . '.' . Helpers::randomString(30));
        
         $user = Database::select('SELECT id FROM users WHERE email = ?', [$data->email]);
 
@@ -136,7 +137,7 @@ class UserService {
 
     /**
      * Returns a user by searching their email and hash password
-     * 
+     *
      * @param $email
      * @param $password
      */
@@ -148,7 +149,7 @@ class UserService {
             return false;
         }
         
-        $hashedPassword = hash('sha256' , $user->salt . '.' . $password);
+        $hashedPassword = hash('sha256', $user->salt . '.' . $password);
 
         if (hash_equals($user->password, $hashedPassword)) {
             unset($user->password);
@@ -160,8 +161,8 @@ class UserService {
         return false;
 
         // $user = Database::select('SELECT id, email, first_name, last_name, `role`
-        //     FROM users 
-        //     WHERE email = ? 
+        //     FROM users
+        //     WHERE email = ?
         //     AND password = ?', [
         //         $email, $hashedPassword
         //     ]);
@@ -171,7 +172,7 @@ class UserService {
 
     /**
      * Creates a cookie session
-     * 
+     *
      * @param $userId
      */
     private function saveSession($userId)
@@ -180,12 +181,12 @@ class UserService {
             'cookie_lifetime' => 86400,
         ]);
      
-        $uniqueId = uniqid('', TRUE); // Add true for more entropy
+        $uniqueId = uniqid('', true); // Add true for more entropy
         $_SESSION['unique_id'] = $uniqueId;
         
         $stmt = Database::insert("INSERT INTO sessions(user_id, session_id, expires_at) 
             VALUES (?, ?, CURRENT_TIMESTAMP + INTERVAL 1 DAY)", [
-                $userId, 
+                $userId,
                 $uniqueId
             ]);
     }

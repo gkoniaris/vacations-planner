@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Classes;
+
 use App\Core\Singletons\Database;
 use App\Core\Singletons\Request;
 use App\Core\Exceptions\FunctionalException;
 use App\Libraries\Mailer;
 use App\Classes\Helpers;
 
-class Application {
+class Application
+{
 
     /**
      * Returns all vacation applications
@@ -27,7 +29,7 @@ class Application {
 
     /**
      * Creates a new vacation application
-     * 
+     *
      * @param $data
      * @param $employee
      */
@@ -37,7 +39,9 @@ class Application {
 
         $totalDaysRequested = $this->totalDaysRequested($data->from, $data->to);
 
-        if ($totalDaysRequested < 1) throw new FunctionalException('Please provide valid dates');
+        if ($totalDaysRequested < 1) {
+            throw new FunctionalException('Please provide valid dates');
+        }
 
         Database::beginTransaction();
 
@@ -127,7 +131,7 @@ class Application {
 
     /**
      * Processes a vacation application, either by approving it or declining it
-     * 
+     *
      * @param $hash
      */
     public function process($hash)
@@ -192,7 +196,7 @@ class Application {
 
     /**
      * Returns the total days requested by the employee
-     * 
+     *
      * @param $from
      * @param $to
      */
@@ -208,7 +212,7 @@ class Application {
 
     /**
      * Returns the remaining paid time off of the employee
-     * 
+     *
      * @param $employeeId
      */
     private function remainingDays($employeeId)
@@ -222,7 +226,7 @@ class Application {
 
     /**
      * Checks if dates overlap
-     * 
+     *
      * @param $from
      * @param $to
      * @param $employeeId
@@ -235,8 +239,7 @@ class Application {
                 `from` BETWEEN ? AND ? OR 
                 `to` BETWEEN ? AND ? OR
                 ? BETWEEN `from` AND `to`
-            );'
-        , [
+            );', [
             $employeeId,
             $from,
             $to,
@@ -250,10 +253,10 @@ class Application {
 
     /**
      * Sends a request to the employee supervisor to approve / decline their vacation request
-     * 
+     *
      * @param $employee
      * @param $supervisor
-     * @param $data 
+     * @param $data
      */
     private function sendVacationRequestEmail($employee, $supervisor, $data)
     {
@@ -278,10 +281,10 @@ class Application {
     /**
      * Sends an email informing the employee about the decision of the supervisor
      * either approving or declining their vacation request
-     * 
+     *
      * @param $employee
      * @param $application
-     * @param $status 
+     * @param $status
      */
     private function sendProcessEmaiToEmployee($employee, $application, $status)
     {
@@ -299,5 +302,4 @@ class Application {
              ->view('mail.vacations.process')
              ->send();
     }
-
 }

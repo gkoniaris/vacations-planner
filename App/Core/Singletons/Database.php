@@ -3,8 +3,8 @@ namespace App\Core\Singletons;
 
 use App\Core\Patterns\Singleton;
 
-class Database extends Singleton {
-
+class Database extends Singleton
+{
     protected static $instance;
     protected static $connection;
 
@@ -45,13 +45,13 @@ class Database extends Singleton {
             ]);
 
             return $connection;
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
             die($e->getMessage());
         }
     }
 
     /**
-     * ORM like functions wrapping the PHP PDO 
+     * ORM like functions wrapping the PHP PDO
      */
     public static function select($query, $params = [], $model = null)
     {
@@ -59,8 +59,8 @@ class Database extends Singleton {
 
         $initialStmt->execute($params);
 
-        if($model) {
-            $initialStmt->setFetchMode(\PDO::FETCH_CLASS, $model); 
+        if ($model) {
+            $initialStmt->setFetchMode(\PDO::FETCH_CLASS, $model);
 
             return $initialStmt->fetch();
         }
@@ -74,7 +74,7 @@ class Database extends Singleton {
 
         $initialStmt->execute($params);
 
-        if($model) {
+        if ($model) {
             return $initialStmt->fetchAll(\PDO::FETCH_CLASS, $model);
         }
 
@@ -87,12 +87,16 @@ class Database extends Singleton {
         $initialStmt = static::getInstance()::$connection->prepare($query);
         
         $inTransaction = $dbh->inTransaction();
-        if (!$inTransaction) $dbh->beginTransaction();
+        if (!$inTransaction) {
+            $dbh->beginTransaction();
+        }
 
         $initialStmt->execute($params);
         $lastInsertedId = $dbh->lastInsertId();
 
-        if (!$inTransaction) $dbh->commit();
+        if (!$inTransaction) {
+            $dbh->commit();
+        }
 
         return $lastInsertedId;
     }
@@ -107,13 +111,12 @@ class Database extends Singleton {
         $initialStmt = static::getInstance()::$connection->prepare($query);
 
         return $initialStmt->execute($params);
-
     }
 
-    public static function execute($query) 
+    public static function execute($query)
     {
         return static::getInstance()::$connection->exec($query);
-    } 
+    }
 
     public static function beginTransaction()
     {

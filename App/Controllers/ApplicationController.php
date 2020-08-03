@@ -34,7 +34,9 @@ class ApplicationController extends BaseController
 
         $validated = ApplicationCreateValidator::validate($data);
 
-        if ($validated !== true) return Response::json(['message' => $validated], 400);
+        if ($validated !== true) {
+            return Response::json(['message' => $validated], 400);
+        }
 
         $user = $this->request->user();
 
@@ -42,9 +44,10 @@ class ApplicationController extends BaseController
             $application = $this->application->create($data, $user);
             
             return Response::json($application);
-        } catch(FunctionalException $e) {
+        } catch (FunctionalException $e) {
             return Response::json(['message' => $e->getMessage()], 400);
-        } catch(\Exception $e) {;
+        } catch (\Exception $e) {
+            ;
             return Response::json(['message' => 'Something went wrong'], 500);
         }
     }
@@ -57,15 +60,18 @@ class ApplicationController extends BaseController
 
         $validated = ApplicationProcessValidator::validate($data);
 
-        if ($validated !== true) return Response::redirect($settings['FRONTEND_URL'] . '/?error=true&message=Invalid email link');
+        if ($validated !== true) {
+            return Response::redirect($settings['FRONTEND_URL'] . '/?error=true&message=Invalid email link');
+        }
 
         try {
             $this->application->process($data->hash);
     
             return Response::redirect($settings['FRONTEND_URL'] . '/?message=The application was successfully processed');
-        } catch(FunctionalException $e) {
+        } catch (FunctionalException $e) {
             return Response::redirect($settings['FRONTEND_URL'] . '/?error=true&message=The application has been already processed');
-        } catch(\Exception $e) {;
+        } catch (\Exception $e) {
+            ;
             return Response::redirect($settings['FRONTEND_URL'] . '/?error=true&message=Something went wrong, please try again later');
         }
     }

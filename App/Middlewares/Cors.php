@@ -7,8 +7,8 @@ use App\Core\Singletons\Request;
 /**
  * Middleware that enables cross origin requests
  */
-class Cors extends BaseMiddleware{
-
+class Cors extends BaseMiddleware
+{
     protected $request;
     
     public function __construct(Request $request)

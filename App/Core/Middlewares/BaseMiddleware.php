@@ -5,7 +5,7 @@ namespace App\Core\Middlewares;
 /**
  * Base Middleware. All middlewares extend from this one
  */
-class BaseMiddleware implements BaseMiddlewareInterface
+abstract class BaseMiddleware implements BaseMiddlewareInterface
 {
 
     /**
@@ -21,8 +21,6 @@ class BaseMiddleware implements BaseMiddlewareInterface
      */
     public function handle()
     {
-        
+        return false;
     }
-
-
 }

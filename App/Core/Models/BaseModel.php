@@ -14,7 +14,9 @@ abstract class BaseModel implements BaseModelInterface
 
     public function __construct()
     {
-        if ($this->table === null) throw new \Exception('Provide table name');
+        if ($this->table === null) {
+            throw new \Exception('Provide table name');
+        }
     }
 
     private function generatePlaceholders($length)
@@ -23,11 +25,13 @@ abstract class BaseModel implements BaseModelInterface
 
         for ($i = 0; $i < $length; $i++) {
             $placeholders .= '?';
-            if ($i !== $length - 1) $placeholders .= ', ';
+            if ($i !== $length - 1) {
+                $placeholders .= ', ';
+            }
         }
 
         return $placeholders;
-    } 
+    }
 
     public function set($field, $value)
     {
@@ -38,7 +42,7 @@ abstract class BaseModel implements BaseModelInterface
     public function all()
     {
         $results = Database::selectAll(
-            'SELECT * FROM ' . $this->table, 
+            'SELECT * FROM ' . $this->table,
             [],
             get_class($this)
         );
@@ -49,7 +53,7 @@ abstract class BaseModel implements BaseModelInterface
     public function find($id)
     {
         $results = Database::select(
-            'SELECT * FROM ' . $this->table . ' WHERE id = ?', 
+            'SELECT * FROM ' . $this->table . ' WHERE id = ?',
             [$id],
             get_class($this)
         );
@@ -60,7 +64,7 @@ abstract class BaseModel implements BaseModelInterface
     public function findBy($field, $value)
     {
         $results = Database::select(
-            'SELECT * FROM ' . $this->table . ' WHERE ' . $field . ' = ?', 
+            'SELECT * FROM ' . $this->table . ' WHERE ' . $field . ' = ?',
             [$value],
             get_class($this)
         );
@@ -68,10 +72,12 @@ abstract class BaseModel implements BaseModelInterface
         return $results;
     }
 
-    public function fill($data) 
+    public function fill($data)
     {
-        foreach($data as $field => $value) {
-            if (!in_array($field, $this->fillable)) continue;
+        foreach ($data as $field => $value) {
+            if (!in_array($field, $this->fillable)) {
+                continue;
+            }
             $this->{$field} = $value;
             $this->data[$field] = $value;
         }
@@ -90,7 +96,7 @@ abstract class BaseModel implements BaseModelInterface
         
         ksort($modelData);
 
-        $keys = array_map(function($key) {
+        $keys = array_map(function ($key) {
             return '`' . $key . '`';
         }, array_keys($modelData));
 
@@ -99,7 +105,7 @@ abstract class BaseModel implements BaseModelInterface
         $values = array_values($modelData);
 
         $id = Database::insert(
-            'INSERT INTO ' . $this->table . ' (' . $fields . ') VALUES (' . $placeholders . ')', 
+            'INSERT INTO ' . $this->table . ' (' . $fields . ') VALUES (' . $placeholders . ')',
             $values
         );
 
