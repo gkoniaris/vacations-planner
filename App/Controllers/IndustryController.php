@@ -9,9 +9,9 @@ class IndustryController extends BaseController
 {
     protected $industry;
 
-    public function __construct()
+    public function __construct(IndustryModel $industry)
     {
-        $this->industry = new IndustryModel();
+        $this->industry = $industry;
     }
 
     public function index()

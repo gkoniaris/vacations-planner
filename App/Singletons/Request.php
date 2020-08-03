@@ -101,7 +101,21 @@ class Request extends Singleton
                 return Response::json(['error' => 'Not found']);
             }
 
-            $controller = new $route['controller']($this->data);
+            $reflector = new \ReflectionClass($route['controller']);
+            $parameters = $reflector->getConstructor()->getParameters();
+
+            $parametersToInject = [];
+
+            foreach($parameters as $parameter)
+            {
+                $className = $parameter->getClass()->name;
+                $class = new $className();
+                $parametersToInject[] = $class;
+            }
+
+            // $parametersToInject[] = $this->data;
+            
+            $controller = new $route['controller'](...$parametersToInject);
 
             foreach($route['middlewares'] as $middleware) {
                 new $middleware(Request::getInstance());
