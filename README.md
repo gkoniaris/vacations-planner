@@ -78,8 +78,8 @@ You can then access the frontend of the application at [http://localhost:8080](h
 ## Screenshots
 
 <p align="left">
-  <a href="https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%201.PNG">
-    <img src="https://github.com/gkoniaris/vacations-planner/blob/master/screenshots/screenshot%201.PNG" height="auto" width="200" />
+  <a href="https://github.com/gkoniaris/vacations-planner/blob/39668b3148b569a95d0880c488143342a5abfe54/screenshots/screenshot%201.PNG">
+    <img src="https://github.com/gkoniaris/vacations-planner/blob/39668b3148b569a95d0880c488143342a5abfe54/screenshots/screenshot%201.PNG" height="auto" width="200" />
   </a>
 
   <a href="https://github.com/gkoniaris/vacations-planner/blob/0cafbcf4e5733dc7db82943d8f752760b05fb846/screenshots/screenshot%202.PNG">
