@@ -108,9 +108,13 @@ class Request extends Singleton
 
             foreach($parameters as $parameter)
             {
-                $className = $parameter->getClass()->name;
-                $class = new $className();
-                $parametersToInject[] = $class;
+                $classObject = $parameter->getClass();
+                
+                if ($classObject->isInstantiable()) {
+                    $className = $classObject->name;
+                    $class = new $className();
+                    $parametersToInject[] = $class;
+                }
             }
 
             // $parametersToInject[] = $this->data;
