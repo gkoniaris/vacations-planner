@@ -2,6 +2,8 @@
 
 namespace App\Validators;
 
+use App\Core\Validators\BaseValidator;
+
 class UserUpdateValidator extends BaseValidator {
 
     public static function validate($data)

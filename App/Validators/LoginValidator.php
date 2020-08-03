@@ -2,6 +2,7 @@
 
 namespace App\Validators;
 
+use App\Core\Validators\BaseValidator;
 use App\Classes\Helpers;
 
 class LoginValidator extends BaseValidator {

@@ -1,7 +1,9 @@
 <?php
 namespace App\Middlewares;
-use App\Singletons\Request;
-use App\Singletons\Response;
+
+use App\Core\Middlewares\BaseMiddleware;
+use App\Core\Singletons\Request;
+use App\Core\Singletons\Response;
 
 class IsSupervisor extends BaseMiddleware{
 
@@ -13,7 +15,7 @@ class IsSupervisor extends BaseMiddleware{
         parent::__construct();
     }
 
-    protected function handle()
+    public function handle()
     {
         global $settings;
 

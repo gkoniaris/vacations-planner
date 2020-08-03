@@ -2,12 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Singletons\Request;
-use App\Singletons\Response;
+use App\Core\Controllers\BaseController;
+use App\Core\Singletons\Request;
+use App\Core\Singletons\Response;
 use App\Services\UserService;
 use App\Validators\UserCreateValidator;
 use App\Validators\UserUpdateValidator;
-use App\FunctionalException;
+use App\Core\Exceptions\FunctionalException;
 
 class UserController extends BaseController
 {

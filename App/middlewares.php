@@ -1,5 +1,5 @@
 <?php
-use App\Singletons\Request;
+use App\Core\Singletons\Request;
 
 $generalMiddlewares = [
     'App\Middlewares\Cors'

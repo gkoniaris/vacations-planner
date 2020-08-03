@@ -45,9 +45,7 @@
                 </div>
             </div>
             <div class="row no-gutters mt-4">
-                <div class="col-md-5">
-                </div>
-                <div class="col-md-7 box">
+                <div class="col-md-12 box">
                     <h5 class="header">Your Employees</h5>
                     <div class="table-responsive">
                         <table class="table table table-hover">

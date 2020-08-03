@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Middlewares;
+namespace App\Core\Middlewares;
 
 /**
  * Base Middleware. All middlewares extend from this one
  */
-class BaseMiddleware{
+class BaseMiddleware implements BaseMiddlewareInterface
+{
 
     /**
      * BaseMiddleware constructor.
@@ -18,8 +19,9 @@ class BaseMiddleware{
     /**
      * The handle method for our middlewares. We must override this method in the child middlewares
      */
-    protected function handle()
+    public function handle()
     {
+        
     }
 
 

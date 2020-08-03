@@ -1,9 +1,9 @@
 <?php
 namespace App\Services;
 
-use App\Singletons\Database;
+use App\Core\Singletons\Database;
 use App\Classes\Helpers;
-use App\FunctionalException;
+use App\Core\Exceptions\FunctionalException;
 use App\Models\User as UserModel;
 use App\Models\Company as CompanyModel;
 

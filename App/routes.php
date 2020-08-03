@@ -1,5 +1,5 @@
 <?php
-use App\Singletons\Router;
+use App\Core\Singletons\Router;
 
 $router = Router::getInstance();
 

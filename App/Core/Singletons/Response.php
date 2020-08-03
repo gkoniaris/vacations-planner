@@ -1,7 +1,7 @@
 <?php
-namespace App\Singletons;
+namespace App\Core\Singletons;
 
-use App\Patterns\Singleton;
+use App\Core\Patterns\Singleton;
 
 class Response extends Singleton{
 

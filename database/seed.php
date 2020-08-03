@@ -14,7 +14,7 @@ try {
 
         $seed = file_get_contents('./database/seeds/' . $file);
 
-        App\Singletons\Database::execute($seed);
+        App\Core\Singletons\Database::execute($seed);
 
         echo "Seed $seedName ran successfully \n";
     }

@@ -1,8 +1,8 @@
 <?php
 namespace App\Models;
 
-use App\Models\BaseModel;
-use App\Singletons\Database;
+use App\Core\Models\BaseModel;
+use App\Core\Singletons\Database;
 
 class Company extends BaseModel
 {

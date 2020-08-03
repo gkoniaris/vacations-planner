@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Core\Controllers\BaseController;
 use App\Services\UserService;
-use App\Singletons\Request;
-use App\Singletons\Response;
+use App\Core\Singletons\Request;
+use App\Core\Singletons\Response;
 use App\Validators\LoginValidator;
 use App\Validators\RegisterValidator;
 

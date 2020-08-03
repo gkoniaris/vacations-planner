@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Classes;
-use App\Singletons\Database;
-use App\Singletons\Request;
-use App\FunctionalException;
+use App\Core\Singletons\Database;
+use App\Core\Singletons\Request;
+use App\Core\Exceptions\FunctionalException;
 use App\Libraries\Mailer;
 use App\Classes\Helpers;
 

@@ -1,8 +1,10 @@
 <?php
 namespace App\Middlewares;
-use App\Singletons\Request;
-use App\Singletons\Response;
-use App\Singletons\Database;
+
+use App\Core\Middlewares\BaseMiddleware;
+use App\Core\Singletons\Request;
+use App\Core\Singletons\Response;
+use App\Core\Singletons\Database;
 
 /**
  * Middleware that checks if a user has a valid active session
@@ -18,7 +20,7 @@ class Authenticated extends BaseMiddleware
         parent::__construct();
     }
 
-    protected function handle()
+    public function handle()
     {
         try {
             session_start();

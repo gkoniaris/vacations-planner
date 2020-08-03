@@ -1,6 +1,8 @@
 <?php
 namespace App\Middlewares;
-use App\Singletons\Request;
+
+use App\Core\Middlewares\BaseMiddleware;
+use App\Core\Singletons\Request;
 
 class IsEmployee extends BaseMiddleware{
 
@@ -13,7 +15,7 @@ class IsEmployee extends BaseMiddleware{
     }
 
 
-    protected function handle()
+    public function handle()
     {
         global $settings;
 

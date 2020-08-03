@@ -1,7 +1,7 @@
 <?php
-namespace App\Models;
+namespace App\Core\Models;
 
-use App\Singletons\Database;
+use App\Core\Singletons\Database;
 
 abstract class BaseModel implements BaseModelInterface
 {

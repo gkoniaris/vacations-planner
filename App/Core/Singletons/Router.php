@@ -1,7 +1,7 @@
 <?php
-namespace App\Singletons;
+namespace App\Core\Singletons;
 
-use App\Patterns\Singleton;
+use App\Core\Patterns\Singleton;
 
 class Router extends Singleton{
 
@@ -135,7 +135,7 @@ class Router extends Singleton{
                 $class = class_exists($middleware);
                 if (!$class) throw new \Exception('Invalid middleware class');
                 
-                $middlewareClass = is_subclass_of($middleware, 'App\Middlewares\BaseMiddleware');
+                $middlewareClass = is_subclass_of($middleware, 'App\Core\Middlewares\BaseMiddleware');
                 if (!$middlewareClass) throw new \Exception('Middlewares must extend BaseMiddleware class');
             }
         }

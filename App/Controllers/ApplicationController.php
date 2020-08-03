@@ -2,10 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Singletons\Request;
-use App\Singletons\Response;
+use App\Core\Controllers\BaseController;
+use App\Core\Singletons\Request;
+use App\Core\Singletons\Response;
 use App\Classes\Application;
-use App\FunctionalException;
+use App\Core\Exceptions\FunctionalException;
 use App\Validators\ApplicationCreateValidator;
 use App\Validators\ApplicationProcessValidator;
 

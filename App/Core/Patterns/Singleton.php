@@ -1,5 +1,6 @@
 <?php
-namespace App\Patterns;
+namespace App\Core\Patterns;
+
 abstract class Singleton
 {
     /**

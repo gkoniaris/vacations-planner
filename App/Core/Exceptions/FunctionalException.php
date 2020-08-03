@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Core\Exceptions;
 
 /**
  * A custom exception to return for predictable errors

@@ -2,7 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Singletons\Response;
+use App\Core\Controllers\BaseController;
+use App\Core\Singletons\Response;
 use App\Models\Industry as IndustryModel;
 
 class IndustryController extends BaseController

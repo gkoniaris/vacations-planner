@@ -1,8 +1,8 @@
 <?php
-namespace App\Singletons;
+namespace App\Core\Singletons;
 
-use App\Patterns\Singleton;
-use App\Singletons\Response;
+use App\Core\Patterns\Singleton;
+use App\Core\Singletons\Response;
 use App\Middlewares\Cors;
 
 class Request extends Singleton

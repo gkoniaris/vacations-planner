@@ -1,6 +1,8 @@
 <?php
 namespace App\Middlewares;
-use App\Singletons\Request;
+
+use App\Core\Middlewares\BaseMiddleware;
+use App\Core\Singletons\Request;
 
 /**
  * Middleware that enables cross origin requests
@@ -15,7 +17,7 @@ class Cors extends BaseMiddleware{
         parent::__construct();
     }
 
-    protected function handle()
+    public function handle()
     {
         global $settings;
         
