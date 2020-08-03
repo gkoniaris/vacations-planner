@@ -44,13 +44,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-4">
+            <div class="row no-gutters mt-4">
                 <div class="col-md-5">
                 </div>
                 <div class="col-md-7 box">
                     <h5 class="header">Your Employees</h5>
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table table-hover">
                             <thead class="thead-dark">
                                 <th>
                                     Full name
