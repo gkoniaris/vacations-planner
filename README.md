@@ -31,6 +31,20 @@ Vacation planner is a side/pet project written in plain PHP, allowing companies 
 - Supervisors can see all vacations in a practical calendar
 - All notifications are performed via email
 
+# What was implemented in the backend
+
+I tried to implement my own simple version of Laravel, so I can dive into PHP internals like Reflection, sessions and more, as well as find ways to correctly structure all these components and make them work together. So, these are some of the things that were implemented in this project.
+
+- A custom router following the MVC pattern, allowing to use controllers and middlewares
+- A simple ORM to perform database operations
+- Facades for accessing request data, accessing the database and more
+- A simple Dependency Injection container to intantiate controller dependencies
+- Error handling using custom exceptions as well as global error handling
+- Custom validators that can be injected in controllers through the DI container
+- Authentication / authorization using PHP sessions
+- A simple mailer library using PHPMailer
+- Migration and seed scripts
+
 ## Prerequisites
 
 To setup this project you have to install NodeJS and Docker in your computer. I have tested this setup in a Unix environment but it will probably work in Windows / Mac too.
