@@ -47,7 +47,7 @@ class UserService {
         $user = $this->findByEmailPassword($email, $password);
         
         if ($user) {
-            $this->saveSession($user['id']);
+            $this->saveSession($user->id);
             
             return $user;
         }
@@ -142,22 +142,31 @@ class UserService {
      */
     private function findByEmailPassword($email, $password)
     {
-        $initialUser = Database::select('SELECT * FROM users WHERE email = ?', [$email]);
+        $user = $this->user->findBy('email', $email);
 
-        if (!$initialUser) {
+        if (!$user) {
             return false;
         }
         
-        $hashedPassword = hash('sha256' , $initialUser['salt'] . '.' . $password);
+        $hashedPassword = hash('sha256' , $user->salt . '.' . $password);
 
-        $user = Database::select('SELECT id, email, first_name, last_name, `role`
-            FROM users 
-            WHERE email = ? 
-            AND password = ?', [
-                $email, $hashedPassword
-            ]);
+        if (hash_equals($user->password, $hashedPassword)) {
+            unset($user->password);
+            unset($user->salt);
 
-        return $user;
+            return $user;
+        }
+
+        return false;
+
+        // $user = Database::select('SELECT id, email, first_name, last_name, `role`
+        //     FROM users 
+        //     WHERE email = ? 
+        //     AND password = ?', [
+        //         $email, $hashedPassword
+        //     ]);
+
+        // return $user;
     }
 
     /**

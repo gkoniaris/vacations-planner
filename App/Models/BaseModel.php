@@ -57,6 +57,17 @@ abstract class BaseModel implements BaseModelInterface
         return $results;
     }
 
+    public function findBy($field, $value)
+    {
+        $results = Database::select(
+            'SELECT * FROM ' . $this->table . ' WHERE ' . $field . ' = ?', 
+            [$value],
+            get_class($this)
+        );
+
+        return $results;
+    }
+
     public function fill($data) 
     {
         foreach($data as $field => $value) {
