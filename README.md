@@ -31,7 +31,7 @@ Vacation planner is a side/pet project written in plain PHP, allowing companies 
 - Supervisors can see all vacations in a practical calendar
 - All notifications are performed via email
 
-# What was implemented in the backend
+## What was implemented in the backend
 
 I tried to implement my own simple version of Laravel, so I can dive into PHP internals like Reflection, sessions and more, as well as find ways to correctly structure all these components and make them work together. So, these are some of the things that were implemented in this project.
 
