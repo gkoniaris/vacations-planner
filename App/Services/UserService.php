@@ -9,9 +9,9 @@ use App\Models\Company as CompanyModel;
 
 class UserService
 {
-    public function __construct()
+    public function __construct(UserModel $user)
     {
-        $this->user = new UserModel();
+        $this->user = $user;
     }
 
     public static function register($userData, $companyData)

@@ -4,20 +4,19 @@ namespace App\Controllers;
 
 use App\Core\Controllers\BaseController;
 use App\Core\Singletons\Response;
-use App\Models\Industry as IndustryModel;
+use App\Services\IndustryService;
 
 class IndustryController extends BaseController
 {
-    protected $industry;
 
-    public function __construct(IndustryModel $industry)
+    public function __construct(IndustryService $industry)
     {
         $this->industry = $industry;
     }
 
     public function index()
     {
-        $industries = $this->industry->all();
+        $industries = $this->industry->get();
 
         Response::json($industries);
     }

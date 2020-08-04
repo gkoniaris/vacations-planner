@@ -1,13 +1,13 @@
 <?php
 namespace App\Services;
 
-use App\Models\Industry as IndustryModel;
+use App\Models\Industry;
 
 class IndustryService
 {
-    public function __construct()
+    public function __construct(Industry $industry)
     {
-        $this->industry = new IndustryModel();
+        $this->industry = $industry;
     }
 
     public function get()

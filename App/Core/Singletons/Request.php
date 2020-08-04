@@ -3,6 +3,7 @@ namespace App\Core\Singletons;
 
 use App\Core\Patterns\Singleton;
 use App\Core\Singletons\Response;
+use App\Core\Services\DIContainer;
 use App\Middlewares\Cors;
 
 class Request extends Singleton
@@ -102,28 +103,14 @@ class Request extends Singleton
                 return Response::json(['error' => 'Not found']);
             }
 
-            $reflector = new \ReflectionClass($route['controller']);
-            $parameters = $reflector->getConstructor()->getParameters();
-
-            $parametersToInject = [];
-
-            foreach ($parameters as $parameter) {
-                $classObject = $parameter->getClass();
-
-                if ($classObject->isInstantiable()) {
-                    $className = $classObject->name;
-                    $class = new $className();
-                    $parametersToInject[] = $class;
-                }
-            }
-            
-            $controller = new $route['controller'](...$parametersToInject);
+            // We use the Dependency Injection container to resolve all nested dependencies
+            $controllerWithDependencies = DIContainer::resolve($route['controller']);
 
             foreach ($route['middlewares'] as $middleware) {
                 new $middleware(Request::getInstance());
             }
 
-            $controller->{$route['method']}();
+            $controllerWithDependencies->{$route['method']}();
         } catch (\Exception $e) {
             $this->terminateRequestWithException($e);
         }

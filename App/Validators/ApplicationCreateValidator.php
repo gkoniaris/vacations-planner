@@ -7,6 +7,7 @@ use App\Classes\Helpers;
 
 class ApplicationCreateValidator extends BaseValidator
 {
+
     public static function validate($data)
     {
         if (!$data) {
