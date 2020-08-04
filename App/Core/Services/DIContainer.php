@@ -1,8 +1,15 @@
 <?php
 namespace App\Core\Services;
 
+/**
+ * Service responsible for resolving class dependencies
+ */
 class DIContainer
 {
+    /**
+     * Resolves class dependencies as well as the dependencies
+     * of each dependency, using recursion
+     */
     public static function resolve($className)
     {
         $reflector = new \ReflectionClass($className);
