@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Validators;
+namespace App\Core\Validators;
 
 abstract class BaseValidator
 {
