@@ -8,7 +8,6 @@ class RegisterValidator extends BaseValidator
 {
     public static function validate($data)
     {
-        echo(json_encode($data));
         if (!$data) {
             return 'Please provide valid data';
         }

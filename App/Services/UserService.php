@@ -14,26 +14,26 @@ class UserService
         $this->user = $user;
     }
 
-    public static function register($userData, $companyData)
-    {
-        $salt = Helpers::randomString();
-        $hashedPassword = hash('sha256', $salt . '.' . $userData->password);
+    // public static function register($userData, $companyData)
+    // {
+    //     $salt = Helpers::randomString();
+    //     $hashedPassword = hash('sha256', $salt . '.' . $userData->password);
 
-        $company = new CompanyModel();
-        $company->fill($companyData);
-        $company = $company->save();
+    //     $company = new CompanyModel();
+    //     $company->fill($companyData);
+    //     $company = $company->save();
 
 
-        $user = new UserModel();
-        $user->fill($userData);
-        $user->set('company_id', $company->id);
-        $user->set('password', $hashedPassword);
-        $user->set('salt', $salt);
-        $user->set('role', 'supervisor');
-        $user->save();
+    //     $user = new UserModel();
+    //     $user->fill($userData);
+    //     $user->set('company_id', $company->id);
+    //     $user->set('password', $hashedPassword);
+    //     $user->set('salt', $salt);
+    //     $user->set('role', 'supervisor');
+    //     $user->save();
 
-        return $user;
-    }
+    //     return $user;
+    // }
 
     /**
      * Performs login and creates a session for the user
@@ -96,11 +96,13 @@ class UserService
         $user = $this->user->fill([
             'first_name' => $data->first_name,
             'last_name' => $data->last_name,
-            'email' => $data->email,
-            'salt' => $salt,
-            'password' => $hashedPassword,
-            'role' => $data->role
+            'email' => $data->email
         ]);
+
+        $user->set('salt', $salt);
+        $user->set('password', $hashedPassword);
+        $user->set('role', $data->role);
+        $user->set('company_id', $data->company_id);
 
         $user = $user->save();
 

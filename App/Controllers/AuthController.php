@@ -8,14 +8,16 @@ use App\Core\Singletons\Request;
 use App\Core\Singletons\Response;
 use App\Validators\LoginValidator;
 use App\Validators\RegisterValidator;
+use App\Commands\RegisterUserCommand;
 
 class AuthController extends BaseController
 {
     protected $user;
 
-    public function __construct()
+    public function __construct(UserService $user, RegisterUserCommand $register)
     {
-        $this->user = new UserService();
+        $this->user = $user;
+        $this->register = $register;
     }
 
     public function login()
@@ -51,7 +53,9 @@ class AuthController extends BaseController
             return Response::json(['message' => $validated], 400);
         }
 
-        $user = UserService::register($data->user, $data->company);
+        $this->register->setUser($data->user);
+        $this->register->setCompany($data->company);
+        $user = $this->register->execute();
 
         if (!$user) {
             $responseData = ['message' => 'User not created'];

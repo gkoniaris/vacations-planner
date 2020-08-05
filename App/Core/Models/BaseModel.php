@@ -92,7 +92,7 @@ abstract class BaseModel implements BaseModelInterface
 
     public function create($data)
     {
-        $modelData = $data;
+        $modelData = (array)$data;
         
         ksort($modelData);
 

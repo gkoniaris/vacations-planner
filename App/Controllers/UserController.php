@@ -5,10 +5,10 @@ namespace App\Controllers;
 use App\Core\Controllers\BaseController;
 use App\Core\Singletons\Request;
 use App\Core\Singletons\Response;
-use App\Services\UserService;
+use App\Core\Exceptions\FunctionalException;
 use App\Validators\UserCreateValidator;
 use App\Validators\UserUpdateValidator;
-use App\Core\Exceptions\FunctionalException;
+use App\Services\UserService;
 
 class UserController extends BaseController
 {
