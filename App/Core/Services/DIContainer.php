@@ -2,13 +2,17 @@
 namespace App\Core\Services;
 
 /**
- * Service responsible for resolving class dependencies
+ * DIContainer is a service responsible for resolving class dependencies
  */
 class DIContainer
 {
     /**
      * Resolves class dependencies as well as the dependencies
      * of each dependency, using recursion
+     *
+     * @param  mixed $className The class name to resolve it's dependencies
+     * 
+     * @return mixed Returns an instance of the provided class along with all it's dependencies
      */
     public static function resolve($className)
     {
