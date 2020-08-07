@@ -14,27 +14,6 @@ class UserService
         $this->user = $user;
     }
 
-    // public static function register($userData, $companyData)
-    // {
-    //     $salt = Helpers::randomString();
-    //     $hashedPassword = hash('sha256', $salt . '.' . $userData->password);
-
-    //     $company = new CompanyModel();
-    //     $company->fill($companyData);
-    //     $company = $company->save();
-
-
-    //     $user = new UserModel();
-    //     $user->fill($userData);
-    //     $user->set('company_id', $company->id);
-    //     $user->set('password', $hashedPassword);
-    //     $user->set('salt', $salt);
-    //     $user->set('role', 'supervisor');
-    //     $user->save();
-
-    //     return $user;
-    // }
-
     /**
      * Performs login and creates a session for the user
      *
@@ -48,7 +27,7 @@ class UserService
         $user = $this->findByEmailPassword($email, $password);
         
         if (!$user) return false;
-        
+
         if (!password_verify($user->salt . '.' . $password, $user->password)) return false;
         
         unset($user->password);
