@@ -47,9 +47,9 @@ class UserService
         
         $user = $this->findByEmailPassword($email, $password);
         
-        if (!password_verify($user->salt . '.' . $password, $user->password)) {
-            return false;
-        }
+        if (!$user) return false;
+        
+        if (!password_verify($user->salt . '.' . $password, $user->password)) return false;
         
         unset($user->password);
         unset($user->salt);
