@@ -41,3 +41,13 @@
 .step * {
     margin: auto;
 }
+@media (max-width: 992px) {
+    .card {
+        height: 100%;
+        border: 0;
+        border-radius: 0;
+    }
+    .card-header {
+        border-radius: 0;
+    }
+}

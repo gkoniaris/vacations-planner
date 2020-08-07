@@ -110,7 +110,9 @@ class Request extends Singleton
                 new $middleware(Request::getInstance());
             }
 
-            $controllerWithDependencies->{$route['method']}();
+            $controllerFunctionDependencies = DIContainer::resolveFunctionArgs($route['controller'], $route['method']);
+            $controllerFunctionDependencies[] = $this->data;
+            $controllerWithDependencies->{$route['method']}(...$controllerFunctionDependencies);
         } catch (\Exception $e) {
             $this->terminateRequestWithException($e);
         }

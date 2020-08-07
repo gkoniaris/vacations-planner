@@ -1,6 +1,9 @@
 @import './variables.scss';
 @import './toaster.scss';
 
+html, body, #app, .main-body, .login-page {
+    height: 100%;
+}
 body {
     font-family: 'Montserrat', sans-serif !important;
     background: rgb(232,232,232);
@@ -101,7 +104,7 @@ select.form-control {
     width: 100%;
     height: 49px;
 }
-.main-body {
+.is-logged.main-body {
     float: left;
     width: 100%;
     margin-top: 90px;

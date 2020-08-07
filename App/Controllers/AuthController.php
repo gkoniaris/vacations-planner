@@ -8,16 +8,17 @@ use App\Core\Singletons\Request;
 use App\Core\Singletons\Response;
 use App\Validators\LoginValidator;
 use App\Validators\RegisterValidator;
-use App\Commands\RegisterUserCommand;
+use App\Core\Commands\CommandsInvoker;
+use App\Commands\RegisterUser\RegisterUserCommand;
+use App\Commands\RegisterUser\SendRegistrationEmailCommand;
 
 class AuthController extends BaseController
 {
     protected $user;
 
-    public function __construct(UserService $user, RegisterUserCommand $register)
+    public function __construct(UserService $user)
     {
         $this->user = $user;
-        $this->register = $register;
     }
 
     public function login()
@@ -43,27 +44,19 @@ class AuthController extends BaseController
         return Response::json($responseData);
     }
 
-    public function register()
+    public function register(CommandsInvoker $register, $data)
     {
-        $data = Request::data();
-
         $validated = RegisterValidator::validate($data);
 
         if ($validated !== true) {
             return Response::json(['message' => $validated], 400);
         }
 
-        $this->register->setUser($data->user);
-        $this->register->setCompany($data->company);
-        $user = $this->register->execute();
+        $register->addCommand(new RegisterUserCommand($data))
+                 ->addCommand(new SendRegistrationEmailCommand($data))
+                 ->run();
 
-        if (!$user) {
-            $responseData = ['message' => 'User not created'];
-
-            return Response::json($responseData, 400);
-        }
-
-        $responseData = ['message' => 'You have been successfully logged in', 'user' => $user];
+        $responseData = ['message' => 'You have been successfully registered'];
             
         return Response::json($responseData);
     }

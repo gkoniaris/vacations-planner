@@ -1,6 +1,6 @@
 <template>
   <div class="row login-page">
-    <div class="col-xl-6 offset-xl-3 mt-5">
+    <div class="col-xl-6 offset-xl-3 mt-xl-5">
         <div class="card card-primary">
             <div class="card-header bg-primary text-center pt-4 pb-4">
                 <div class="steps-container">
@@ -410,7 +410,7 @@ export default {
         user: this.form.user,
         company: this.form.company
       }, { withCredentials: true })
-      .then(response => {
+      .then(() => {
         notifier.success('You have successfully registered')
         this.$router.push('/login')
       })

@@ -47,6 +47,13 @@ class UserService
         
         $user = $this->findByEmailPassword($email, $password);
         
+        if (!password_verify($user->salt . '.' . $password, $user->password)) {
+            return false;
+        }
+        
+        unset($user->password);
+        unset($user->salt);
+
         if ($user) {
             $this->saveSession($user->id);
             
@@ -82,16 +89,16 @@ class UserService
      * @param $data
      */
     public function create($data)
-    {
-        $salt = Helpers::randomString();
-        $hashedPassword = hash('sha256', $salt . '.' . Helpers::randomString(30));
-       
+    {      
         $user = Database::select('SELECT id FROM users WHERE email = ?', [$data->email]);
 
         //Return if user already exists
         if ($user) {
             throw new FunctionalException('User with this email already exists');
         }
+
+        $salt = Helpers::randomString(20);
+        $hashedPassword = password_hash($salt . '.' . $data->password, PASSWORD_BCRYPT, ['cost' => 12]);
 
         $user = $this->user->fill([
             'first_name' => $data->first_name,
@@ -151,25 +158,8 @@ class UserService
             return false;
         }
         
-        $hashedPassword = hash('sha256', $user->salt . '.' . $password);
+        return $user;
 
-        if (hash_equals($user->password, $hashedPassword)) {
-            unset($user->password);
-            unset($user->salt);
-
-            return $user;
-        }
-
-        return false;
-
-        // $user = Database::select('SELECT id, email, first_name, last_name, `role`
-        //     FROM users
-        //     WHERE email = ?
-        //     AND password = ?', [
-        //         $email, $hashedPassword
-        //     ]);
-
-        // return $user;
     }
 
     /**

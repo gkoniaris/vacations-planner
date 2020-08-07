@@ -9,14 +9,9 @@ use App\Services\IndustryService;
 class IndustryController extends BaseController
 {
 
-    public function __construct(IndustryService $industry)
+    public function index(IndustryService $industry)
     {
-        $this->industry = $industry;
-    }
-
-    public function index()
-    {
-        $industries = $this->industry->get();
+        $industries = $industry->get();
 
         Response::json($industries);
     }

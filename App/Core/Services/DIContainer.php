@@ -41,4 +41,27 @@ class DIContainer
 
         return $concreteClass;
     }
+
+    public static function resolveFunctionArgs($className, $function)
+    {
+        $reflector = new \ReflectionClass($className);
+        $function = $reflector->getMethod($function);
+        
+        if (!$function) return [];
+
+        $parameters = $function->getParameters();
+        if(!sizeof($parameters)) [];
+
+        $parametersToInject = [];
+
+        foreach ($parameters as $parameter) {
+            $internalClass = $parameter->getClass();
+
+            if (!$internalClass) continue;
+
+            $parametersToInject[] = self::resolve($internalClass->getName());
+        }
+
+        return $parametersToInject;
+    }
 }

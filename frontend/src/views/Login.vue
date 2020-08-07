@@ -1,11 +1,11 @@
 <template>
   <div class="row login-page">
-    <div class="col-xl-8 offset-xl-2 mt-5">
-        <div class="card">
-          <div class="row no-gutters">
-              <div class="col-xl-6 col-lg-12 login-image">
+    <div class="col-xl-8 offset-xl-2 mt-xl-5 d-flex justify-content-center align-items-center">
+        <div class="card d-flex ">
+          <div class="row no-gutters d-flex">
+              <div class="login-image d-flex">
               </div>
-              <div class="col-xl-6 col-lg-12">
+              <div class="d-flex">
                   <div class="card-block px-2 text-center mt-3 pr-5 pl-5">
                       <h4 class="card-title">WELCOME BACK</h4>
                       <form>
@@ -75,7 +75,7 @@ export default {
     border-radius: 100px !important;
     background: white !important;
 }
-.login-page {
+/* .login-page {
   margin: 0;
   position: absolute;
   left: 10%;
@@ -83,7 +83,7 @@ export default {
   width: 80%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-}
+} */
 .login-image {
   background-image: url('../assets/images/login-image.jpg');
   background-position: center;
@@ -99,11 +99,20 @@ export default {
   margin-top: 10px;
   margin-bottom: 20px;
 }
+.card {
+  margin-bottom: 40px;
+}
+.card.card-primary {
+  height: 100%;
+}
 .card-title{
   margin: 60px 0;
 }
+.login-image {
+  width: 400px;
+}
 @media (min-width: 1200px) {  
- .login-page {
+ /* .login-page {
     margin: 0;
     position: absolute;
     left: 10%;
@@ -111,7 +120,7 @@ export default {
     width: 80%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-  }
+  } */
   .login-image {
     min-height: 500px;
   }
@@ -125,6 +134,27 @@ export default {
  }
  .login-image {
    min-height: 300px;
+ }
+}
+@media (max-width: 992px) {
+  .login-image {
+    width: 100%;
+  }
+  .card {
+    height: 100%;
+    width: 100%;
+    align-items:center;
+    margin-top: 0;
+    border: 0;
+}
+.card  * {
+  width: 100%;
+}
+.login-page {
+   position:relative;
+   -ms-transform: translateY(0);
+   transform: translateY(0);
+   margin-bottom: 50px;
  }
 }
 
