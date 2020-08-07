@@ -38,7 +38,7 @@ I tried to implement my own simple version of Laravel, so I can dive into PHP in
 - A custom router following the MVC pattern, allowing to use controllers and middlewares
 - A simple ORM to perform database operations
 - Facades for accessing request data, accessing the database and more
-- A simple Dependency Injection container to intantiate controller dependencies
+- A simple Dependency Injection container to instantiate controller dependencies
 - Error handling using custom exceptions as well as global error handling
 - Custom validators that can be injected in controllers through the DI container
 - Authentication / authorization using PHP sessions
