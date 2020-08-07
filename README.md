@@ -41,7 +41,7 @@ I tried to implement my own simple version of Laravel, so I can dive into PHP in
 - A simple Dependency Injection container to instantiate controller dependencies
 - Error handling using custom exceptions as well as global error handling
 - Custom validators that can be injected in controllers through the DI container
-- Authentication / authorization using PHP sessions
+- Authentication / authorization using bcrypt and PHP sessions
 - Commands to be able to run multiple operations in a queue and later abstract it in a queue worker
 - A simple mailer library using PHPMailer
 - Migration and seed scripts
