@@ -1,7 +1,7 @@
 <?php
 
-require_once('./App/Patterns/Singleton.php');
-require_once('./App/Singletons/Database.php');
+require_once('./App/Core/Patterns/Singleton.php');
+require_once('./App/Core/Singletons/Database.php');
 require_once('./App/config.php');
 
 try {
