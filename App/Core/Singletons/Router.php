@@ -18,47 +18,6 @@ class Router extends Singleton
     }
 
     /**
-     * Initializes a router url, injects middlewares and adds to the rouer instance
-     *
-     * @param $controllerText
-     * @param $uri
-     * @param $middlewares
-     * @param $requestMethod
-     */
-    private function initializeRouterItem($controllerText, $uri, &$middlewares = [], $requestMethod)
-    {
-        $controller = $this->getControllerName($controllerText);
-
-        $method = $this->getControllerMethod($controllerText);
-
-        $this->routes[] = ['controller' => $controller, 'method' => $method, 'httpMethod' => $requestMethod, 'uri' => $uri, 'middlewares' => $middlewares];
-    }
-
-    /**
-     * Returns the name of the controller, which is the part before the @
-     *
-     * @param $controllerText
-     */
-    private function getControllerName($controllerText)
-    {
-        $controllerParts = explode("@", $controllerText);
-
-        return $controllerParts[0];
-    }
-
-    /**
-     * Returns the method / function of the controller, which is the part after the @
-     *
-     * @param $controllerText
-     */
-    private function getControllerMethod($controllerText)
-    {
-        $controllerParts = explode("@", $controllerText);
-
-        return $controllerParts[1];
-    }
-
-    /**
      * Creates a post route and inject into the router
      *
      * @param $controllerText
@@ -95,19 +54,6 @@ class Router extends Singleton
     }
 
     /**
-     * Creates a delete route and inject into the router
-     *
-     * @param $controllerText
-     * @param $uri
-     * @param $middlewares
-     */
-    public function delete($controllerText, $uri, $middlewares = [])
-    {
-        $this->initializeRouterItem($controllerText, $uri, $middlewares, 'DELETE');
-    }
-
-
-    /**
      * Checks if a given route exists based on their uri and method
      *
      * @param $uri
@@ -134,5 +80,73 @@ class Router extends Singleton
         }
 
         return static::$instance;
+    }
+
+    /**
+     * Initializes a router url, injects middlewares and adds to the rouer instance
+     *
+     * @param $controllerText
+     * @param $uri
+     * @param $middlewares
+     * @param $requestMethod
+     */
+    private function initializeRouterItem($controllerText, $uri, &$middlewares = [], $requestMethod)
+    {
+        $controller = $this->getControllerName($controllerText);
+
+        $method = $this->getControllerMethod($controllerText);
+
+        $this->injectMiddlewares($middlewares, $requestMethod);
+
+        $this->routes[] = ['controller' => $controller, 'method' => $method, 'httpMethod' => $requestMethod, 'uri' => $uri, 'middlewares' => $middlewares];
+    }
+
+    /**
+     * Returns the name of the controller, which is the part before the @
+     *
+     * @param $controllerText
+     */
+    private function getControllerName($controllerText)
+    {
+        $controllerParts = explode("@", $controllerText);
+
+        return $controllerParts[0];
+    }
+
+    /**
+     * Returns the method / function of the controller, which is the part after the @
+     *
+     * @param $controllerText
+     */
+    private function getControllerMethod($controllerText)
+    {
+        $controllerParts = explode("@", $controllerText);
+
+        return $controllerParts[1];
+    }
+
+    /**
+     * Injects the middlewares in to the current request
+     *
+     * @param $middlewares
+     * @param $method
+     */
+    private function injectMiddlewares(&$middlewares, $method)
+    {
+        try {
+            foreach ($middlewares as $middleware) {
+                $class = class_exists($middleware);
+                if (!$class) {
+                    throw new \Exception('Invalid middleware class');
+                }
+                
+                $middlewareClass = is_subclass_of($middleware, 'App\Core\Middlewares\BaseMiddleware');
+                if (!$middlewareClass) {
+                    throw new \Exception('Middlewares must extend BaseMiddleware class');
+                }
+            }
+        } catch (\Exception $e) {
+            Request::getInstance()->terminateRequestWithException($e);
+        }
     }
 }
