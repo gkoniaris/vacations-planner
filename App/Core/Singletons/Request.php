@@ -55,13 +55,13 @@ class Request extends Singleton
      * Terminates a request by returning a human readable message to the user
      * @param Exception [$e] An exception object that is passed to the function so we can get it's message
      */
-    public function terminateRequestWithException($e, $status = 500)
+    public function abort($exception, $status = 500)
     {
-        if (is_string($e)) {
-            $e = new \Exception($e);
+        if (is_string($exception)) {
+            $exception = new \Exception($exception);
         }
-        
-        $response = ['message' => $e->getMessage()];
+
+        $response = ['message' => $exception->getMessage()];
         Response::json($response, $status);
         
         exit();
@@ -117,7 +117,7 @@ class Request extends Singleton
             
             $route['controller']::execute($route['method'], $this->data);
         } catch (\Exception $e) {
-            $this->terminateRequestWithException($e);
+            $this->abort($e);
         }
     }
 
@@ -163,7 +163,7 @@ class Request extends Singleton
                     break;
             }
         } catch (\Exception $e) {
-            $this->terminateRequestWithException($e);
+            $this->abort($e);
         }
     }
 

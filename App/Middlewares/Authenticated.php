@@ -26,13 +26,13 @@ class Authenticated extends BaseMiddleware
             session_start();
 
             if (empty($_SESSION['unique_id'])) {
-                return $this->request->terminateRequestWithException('You are not allowed to perform this action', 401);
+                return $this->request->abort('You are not allowed to perform this action', 401);
             }
 
             $session = Database::select('SELECT * FROM sessions WHERE session_id = ? AND expires_at > CURRENT_TIMESTAMP', [$_SESSION['unique_id']]);
 
             if (!$session) {
-                return $this->request->terminateRequestWithException('You are not allowed to perform this action', 401);
+                return $this->request->abort('You are not allowed to perform this action', 401);
             }
 
             $user = Database::select('SELECT * FROM users WHERE id = ?', [$session['user_id']]);

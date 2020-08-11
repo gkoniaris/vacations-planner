@@ -23,7 +23,7 @@ class IsEmployee extends BaseMiddleware
 
         if ($user['role'] !== 'employee') {
             if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-                $this->request->terminateRequestWithException(new \Exception('Unauthorized'), 403);
+                $this->request->abort(new \Exception('Unauthorized'), 403);
             }
 
             return Response::redirect($settings['FRONTEND_URL'] . '/?error=true&message=You dont have permissions for this action');
