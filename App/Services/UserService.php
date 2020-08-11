@@ -109,7 +109,7 @@ class UserService
             throw new FunctionalException('The user does not exist');
         }
 
-        Database::update('UPDATE users SET email = ?, first_name = ?, last_name = ?, role =? WHERE id = ?', [
+        Database::update('UPDATE users SET email = ?, first_name = ?, last_name = ? WHERE id = ?', [
             $data->email,
             $data->first_name,
             $data->last_name,

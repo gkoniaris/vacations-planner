@@ -26,10 +26,10 @@ class UserController extends BaseController
         Response::json($users);
     }
 
-    public function get()
+    public function get(Request $request)
     {
-        $data = Request::query();
-
+        $data = $request->query();
+        
         if (isset($data->id)) {
             $user = $this->user->get($data->id);
             return Response::json($user);
@@ -40,11 +40,9 @@ class UserController extends BaseController
         Response::json($users);
     }
 
-    public function create()
+    public function create($data)
     {
-        try {
-            $data = Request::data();
-            
+        try {           
             $validated = UserCreateValidator::validate($data);
 
             if ($validated !== true) {
@@ -61,11 +59,9 @@ class UserController extends BaseController
         }
     }
 
-    public function update()
+    public function update($data)
     {
         try {
-            $data = Request::data();
-
             $validated = UserUpdateValidator::validate($data);
 
             if ($validated !== true) {
@@ -77,8 +73,6 @@ class UserController extends BaseController
             return Response::json($user);
         } catch (FunctionalException $e) {
             return Response::json(['message' => $e->getMessage()], 400);
-        } catch (\Exception $e) {
-            return Response::json(['message' => 'Something went wrong'], 500);
         }
     }
 }
