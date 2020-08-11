@@ -3,7 +3,7 @@
 require_once('./autoloader.php');
 
 function exception_handler(\Throwable $exception) {
-    error_log($exception->getMessage());
+    error_log($exception);
 
     echo '{ "error": "Something went wrong" }';
 }

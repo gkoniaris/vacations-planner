@@ -30,25 +30,25 @@ class Request extends Singleton
     /**
      * Returns the request http method
      */
-    public static function method()
+    public function method()
     {
-        return static::getInstance()->method;
+        return $this->method;
     }
 
     /**
      * Returns the request body data as object
      */
-    public static function data()
+    public function data()
     {
-        return static::getInstance()->data;
+        return $this->data;
     }
 
     /**
      * Returns the request query string as object
      */
-    public static function query()
+    public function query()
     {
-        return static::getInstance()->query;
+        return $this->query;
     }
     
     /**

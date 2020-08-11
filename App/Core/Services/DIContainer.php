@@ -1,14 +1,15 @@
 <?php
 namespace App\Core\Services;
 
+use App\Core\Patterns\Singleton;
+
 /**
  * DIContainer is a service responsible for resolving class dependencies
  */
 class DIContainer
 {
     /**
-     * Resolves class dependencies as well as the dependencies
-     * of each dependency, using recursion
+     * Resolves a class's dependencies in a recursive way
      *
      * @param  mixed $className The class name to resolve it's dependencies
      * 
@@ -17,8 +18,15 @@ class DIContainer
     public static function resolve($className)
     {
         $reflector = new \ReflectionClass($className);
-        $constructor = $reflector->getConstructor();
         
+        // Handle singletons injection
+        if ($reflector->isSubclassOf('App\Core\Patterns\Singleton'))
+        {
+            return $className::getInstance();
+        }
+        
+        $constructor = $reflector->getConstructor();
+
         if (!$constructor) return new $className;
 
         $parameters = $constructor->getParameters();
@@ -42,6 +50,9 @@ class DIContainer
         return $concreteClass;
     }
 
+    /**
+     * Resolves a methods dependencies in a recursive way
+     */
     public static function resolveFunctionArgs($className, $function)
     {
         $reflector = new \ReflectionClass($className);
