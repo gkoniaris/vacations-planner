@@ -96,8 +96,6 @@ class Router extends Singleton
 
         $method = $this->getControllerMethod($controllerText);
 
-        $this->injectMiddlewares($middlewares, $requestMethod);
-
         $this->routes[] = ['controller' => $controller, 'method' => $method, 'httpMethod' => $requestMethod, 'uri' => $uri, 'middlewares' => $middlewares];
     }
 
@@ -123,30 +121,5 @@ class Router extends Singleton
         $controllerParts = explode("@", $controllerText);
 
         return $controllerParts[1];
-    }
-
-    /**
-     * Injects the middlewares in to the current request
-     *
-     * @param $middlewares
-     * @param $method
-     */
-    private function injectMiddlewares(&$middlewares, $method)
-    {
-        try {
-            foreach ($middlewares as $middleware) {
-                $class = class_exists($middleware);
-                if (!$class) {
-                    throw new \Exception('Invalid middleware class');
-                }
-                
-                $middlewareClass = is_subclass_of($middleware, 'App\Core\Middlewares\BaseMiddleware');
-                if (!$middlewareClass) {
-                    throw new \Exception('Middlewares must extend BaseMiddleware class');
-                }
-            }
-        } catch (\Exception $e) {
-            Request::getInstance()->terminateRequestWithException($e);
-        }
     }
 }
