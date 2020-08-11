@@ -41,15 +41,15 @@
 </template>
 
 <script>
-import http from "../../../http";
-import notifier from "../../../notifier";
+import http from '../../../http'
+import notifier from '../../../notifier'
 
 export default {
-  name: "UsersCreate",
+  name: 'UsersCreate',
   data () {
     return {
       user: {}
-    };
+    }
   },
   mounted () {
     this.getUser(this.$route.params.id)
@@ -57,23 +57,23 @@ export default {
   methods: {
     getUser (id) {
       http
-        .get("/api/users?id=" + id, { withCredentials: true })
+        .get('/api/users?id=' + id, { withCredentials: true })
         .then((response) => {
           this.user = response.data
         })
     },
     updateUser () {
       http
-        .put("/api/users", this.user, { withCredentials: true })
+        .put('/api/users', this.user, { withCredentials: true })
         .then(() => {
-          notifier.success("User created successfully");
-          this.user = {};
+          notifier.success('User created successfully')
+          this.user = {}
           this.$router.push('/admin/users')
         })
         .catch(err => {
-          notifier.alert(err.response.data.message);
-        });
+          notifier.alert(err.response.data.message)
+        })
     }
   }
-};
+}
 </script>
