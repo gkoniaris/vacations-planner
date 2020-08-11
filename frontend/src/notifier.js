@@ -1,4 +1,3 @@
 import AWN from "awesome-notifications"
 
-export default new AWN({
-})
+export default new AWN({})

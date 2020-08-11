@@ -5,7 +5,7 @@ import notifier from '../notifier'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 
-import UsersIndex from '../views/Admin/Users/Index.vue'
+import AdminDashboard from '../views/Admin/Dashboard.vue'
 import UsersCreate from '../views/Admin/Users/Create.vue'
 import UsersEdit from '../views/Admin/Users/Edit.vue'
 import ApplicationsIndex from '../views/Employee/Applications/Index.vue'
@@ -23,9 +23,9 @@ const routes = [{
         component: Register
     },
     {
-        path: '/admin/users',
-        name: 'Admin Index Users',
-        component: UsersIndex,
+        path: '/admin',
+        name: 'Admin Dashboard',
+        component: AdminDashboard,
         meta: {
             requiresAuth: true,
             role: 'supervisor'

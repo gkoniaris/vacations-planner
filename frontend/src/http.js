@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-axios.interceptors.response.use(function(response) {
+axios.interceptors.response.use(function (response) {
     return response;
-}, function(error) {
+}, function (error) {
     if (401 === error.response.status || 403 === error.response.status) {
         localStorage.removeItem('isLogged')
         localStorage.removeItem('role')

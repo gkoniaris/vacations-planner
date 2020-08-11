@@ -7,18 +7,33 @@
         <form>
           <div class="form-group">
             <label>First name</label>
-            <input v-model="user.first_name" type="text" class="form-control" />
+            <input
+              v-model="user.first_name"
+              type="text"
+              class="form-control"
+            />
           </div>
           <div class="form-group">
             <label>Last name</label>
-            <input v-model="user.last_name" type="text" class="form-control" />
+            <input
+              v-model="user.last_name"
+              type="text"
+              class="form-control"
+            />
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input v-model="user.email" type="email" class="form-control" />
+            <input
+              v-model="user.email"
+              type="email"
+              class="form-control"
+            />
           </div>
 
-          <div class="btn btn-primary btn-block" @click="updateUser()">Update user</div>
+          <div
+            class="btn btn-primary btn-block"
+            @click="updateUser()"
+          >Update user</div>
         </form>
       </div>
     </div>
@@ -31,23 +46,23 @@ import notifier from "../../../notifier";
 
 export default {
   name: "UsersCreate",
-  data() {
+  data () {
     return {
       user: {}
     };
   },
-  mounted() {
-      this.getUser(this.$route.params.id)
+  mounted () {
+    this.getUser(this.$route.params.id)
   },
   methods: {
-    getUser(id) {
-        http
+    getUser (id) {
+      http
         .get("/api/users?id=" + id, { withCredentials: true })
         .then((response) => {
-            this.user = response.data
+          this.user = response.data
         })
     },
-    updateUser() {
+    updateUser () {
       http
         .put("/api/users", this.user, { withCredentials: true })
         .then(() => {
