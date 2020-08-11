@@ -24,7 +24,7 @@ class Request extends Singleton
         $this->query = [];
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->router = Router::getInstance();
-        $this->fillData();
+        $this->initialize();
     }
 
     /**
@@ -45,7 +45,7 @@ class Request extends Singleton
     /**
      * Fills the request singleton with the data of the http request based on the method that was used
      */
-    private function fillData()
+    private function initialize()
     {
         try {
             if (isset($_SERVER['QUERY_STRING'])) {
