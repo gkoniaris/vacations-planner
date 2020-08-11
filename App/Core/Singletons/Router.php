@@ -18,6 +18,47 @@ class Router extends Singleton
     }
 
     /**
+     * Initializes a router url, injects middlewares and adds to the rouer instance
+     *
+     * @param $controllerText
+     * @param $uri
+     * @param $middlewares
+     * @param $requestMethod
+     */
+    private function initializeRouterItem($controllerText, $uri, &$middlewares = [], $requestMethod)
+    {
+        $controller = $this->getControllerName($controllerText);
+
+        $method = $this->getControllerMethod($controllerText);
+
+        $this->routes[] = ['controller' => $controller, 'method' => $method, 'httpMethod' => $requestMethod, 'uri' => $uri, 'middlewares' => $middlewares];
+    }
+
+    /**
+     * Returns the name of the controller, which is the part before the @
+     *
+     * @param $controllerText
+     */
+    private function getControllerName($controllerText)
+    {
+        $controllerParts = explode("@", $controllerText);
+
+        return $controllerParts[0];
+    }
+
+    /**
+     * Returns the method / function of the controller, which is the part after the @
+     *
+     * @param $controllerText
+     */
+    private function getControllerMethod($controllerText)
+    {
+        $controllerParts = explode("@", $controllerText);
+
+        return $controllerParts[1];
+    }
+
+    /**
      * Creates a post route and inject into the router
      *
      * @param $controllerText
@@ -93,46 +134,5 @@ class Router extends Singleton
         }
 
         return static::$instance;
-    }
-
-    /**
-     * Initializes a router url, injects middlewares and adds to the rouer instance
-     *
-     * @param $controllerText
-     * @param $uri
-     * @param $middlewares
-     * @param $requestMethod
-     */
-    private function initializeRouterItem($controllerText, $uri, &$middlewares = [], $requestMethod)
-    {
-        $controller = $this->getControllerName($controllerText);
-
-        $method = $this->getControllerMethod($controllerText);
-
-        $this->routes[] = ['controller' => $controller, 'method' => $method, 'httpMethod' => $requestMethod, 'uri' => $uri, 'middlewares' => $middlewares];
-    }
-
-    /**
-     * Returns the name of the controller, which is the part before the @
-     *
-     * @param $controllerText
-     */
-    private function getControllerName($controllerText)
-    {
-        $controllerParts = explode("@", $controllerText);
-
-        return $controllerParts[0];
-    }
-
-    /**
-     * Returns the method / function of the controller, which is the part after the @
-     *
-     * @param $controllerText
-     */
-    private function getControllerMethod($controllerText)
-    {
-        $controllerParts = explode("@", $controllerText);
-
-        return $controllerParts[1];
     }
 }
