@@ -15,10 +15,10 @@ class ApplicationController extends BaseController
     protected $application;
     protected $request;
 
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->application = new Application();
-        $this->request = Request::getInstance();
+        $this->request = $request;
     }
 
     public function index()
@@ -28,10 +28,8 @@ class ApplicationController extends BaseController
         return Response::json($applications);
     }
 
-    public function create()
+    public function create($data)
     {
-        $data = Request::data();
-
         $validated = ApplicationCreateValidator::validate($data);
 
         if ($validated !== true) {

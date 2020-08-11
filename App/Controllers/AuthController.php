@@ -21,10 +21,8 @@ class AuthController extends BaseController
         $this->user = $user;
     }
 
-    public function login()
-    {
-        $data = Request::data();
-        
+    public function login($data)
+    {        
         $validated = LoginValidator::validate($data);
 
         if ($validated !== true) {
