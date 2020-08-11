@@ -9,7 +9,7 @@ use App\Middlewares\Cors;
 
 class Request extends Singleton
 {
-    private $data;
+    protected $data;
     protected $method;
     protected $router;
     protected $user;
@@ -25,100 +25,6 @@ class Request extends Singleton
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->router = Router::getInstance();
         $this->fillData();
-    }
-
-    /**
-     * Returns the request http method
-     */
-    public function method()
-    {
-        return $this->method;
-    }
-
-    /**
-     * Returns the request body data as object
-     */
-    public function data()
-    {
-        return $this->data;
-    }
-
-    /**
-     * Returns the request query string as object
-     */
-    public function query()
-    {
-        return $this->query;
-    }
-    
-    /**
-     * Terminates a request by returning a human readable message to the user
-     * @param Exception [$e] An exception object that is passed to the function so we can get it's message
-     */
-    public function abort($exception, $status = 500)
-    {
-        if (is_string($exception)) {
-            $exception = new \Exception($exception);
-        }
-
-        $response = ['message' => $exception->getMessage()];
-        Response::json($response, $status);
-        
-        exit();
-    }
-
-    private function buildMiddlewares($route, $request)
-    {
-        if (!sizeof($route['middlewares'])) return false;
-
-        $middlewares = new $route['middlewares'][0]($request);
-
-        $i = 1;
-
-        while ($i < sizeof($route['middlewares']) - 1) {
-            $middlewares = $middlewares->setNext(new $route['middlewares'][$i](Request::getInstance()));
-            $i++;
-        }
-
-        return $middlewares;
-    }
-
-    /**
-     * Handles an incoming request by:
-     * Returning to options request with cors headers
-     * Handling 404 errors
-     * Calling the controller to handle the request if all other checks pass
-     */
-    public function serve()
-    {
-        try {
-            $request = Request::getInstance();
-
-            $currentUri = $this->currentUri();
-            $route = $this->router->findRouteInstance($currentUri, $this->method);
-
-            $cors = new Cors($request);
-            $cors->handle();
-
-            /**
-             * Handle 404 errors
-             */
-            if (!$route) {
-                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
-                
-                return Response::json(['error' => 'Not found']);
-            }
-            
-            $middlewares = $this->buildMiddlewares($route, $request);
-            if($middlewares) {
-                $middlewareSuccessfulRun = $middlewares->handle();
-                if (!$middlewareSuccessfulRun) return false;
-            }
-            
-            $route['controller']::execute($route['method'], $this->data);
-        } catch (\Exception $e) {
-            $this->abort($e);
-        }
     }
 
     /**
@@ -163,8 +69,67 @@ class Request extends Singleton
                     break;
             }
         } catch (\Exception $e) {
-            $this->abort($e);
+            $this->terminateRequestWithException($e);
         }
+    }
+
+    /**
+     * Return a chain of route middlewares
+     */
+    private function buildMiddlewares($route, $request)
+    {
+        if (!sizeof($route['middlewares'])) return false;
+
+        $middlewares = new $route['middlewares'][0]($request);
+
+        $i = 1;
+
+        while ($i < sizeof($route['middlewares']) - 1) {
+            $middlewares = $middlewares->setNext(new $route['middlewares'][$i](Request::getInstance()));
+            $i++;
+        }
+
+        return $middlewares;
+    }
+
+    /**
+     * Returns the request http method
+     */
+    public function method()
+    {
+        return $this->method;
+    }
+
+    /**
+     * Returns the request body data as object
+     */
+    public function data()
+    {
+        return $this->data;
+    }
+
+    /**
+     * Returns the request query string as object
+     */
+    public function query()
+    {
+        return $this->query;
+    }
+    
+    /**
+     * Terminates a request by returning a human readable message to the user
+     * @param Exception [$e] An exception object that is passed to the function so we can get it's message
+     */
+    public function abort($exception, $status = 500)
+    {
+        if (is_string($exception)) {
+            $exception = new \Exception($exception);
+        }
+
+        $response = ['message' => $exception->getMessage()];
+        Response::json($response, $status);
+        
+        exit();
     }
 
     /**
@@ -181,5 +146,44 @@ class Request extends Singleton
     public function user()
     {
         return $this->user;
+    }
+
+    /**
+     * Handles an incoming request by:
+     * Returning to options request with cors headers
+     * Handling 404 errors
+     * Calling the controller to handle the request if all other checks pass
+     */
+    public function serve()
+    {
+        try {
+            // Initialize request singleton
+            $request = static::getInstance();
+
+            $currentUri = $this->currentUri();
+            $route = $this->router->findRouteInstance($currentUri, $this->method);
+
+            $cors = new Cors($request);
+            $cors->handle();
+
+            /**
+             * Handle 404 errors
+             */
+            if (!$route) {
+                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
+                
+                return Response::json(['error' => 'Not found']);
+            }
+            
+            $middlewares = $this->buildMiddlewares($route, $this);
+            if($middlewares) {
+                $middlewareSuccessfulRun = $middlewares->handle();
+                if (!$middlewareSuccessfulRun) return false;
+            }
+            
+            $route['controller']::execute($route['method'], $this->data);
+        } catch (\Exception $e) {
+            $this->abort($e);
+        }
     }
 }
