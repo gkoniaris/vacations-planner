@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Core\Middlewares;
-
+use App\Core\Singletons\Response;
 /**
  * Base Middleware. All middlewares extend from this one
  */
@@ -38,8 +38,12 @@ abstract class BaseMiddleware implements BaseMiddlewareInterface
      */
     public function next(...$params)
     {
-        if (sizeof($params)) throw new \Exception($params[0]);
+        if (sizeof($params)) return Response::json(['error' => $params[0]]);
 
-        if($this->nextMiddleware) $this->nextMiddleware->handle();
+        if($this->nextMiddleware) {
+            return $this->nextMiddleware->handle();
+        }
+
+        return true;
     }
 }

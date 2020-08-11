@@ -16,8 +16,8 @@ class Authenticated extends BaseMiddleware
     
     public function __construct(Request $request)
     {
-        $this->request = $request;
         parent::__construct();
+        $this->request = $request;
     }
 
     public function handle()
@@ -26,23 +26,22 @@ class Authenticated extends BaseMiddleware
             session_start();
 
             if (empty($_SESSION['unique_id'])) {
-                Response::json(['message' => 'You are not allowed to perform this action'], 401);
-                exit(0);
+                return $this->request->terminateRequestWithException('You are not allowed to perform this action', 401);
             }
 
             $session = Database::select('SELECT * FROM sessions WHERE session_id = ? AND expires_at > CURRENT_TIMESTAMP', [$_SESSION['unique_id']]);
 
             if (!$session) {
-                Response::json(['message' => 'You are not allowed to perform this action'], 401);
-                exit(0);
+                return $this->request->terminateRequestWithException('You are not allowed to perform this action', 401);
             }
 
             $user = Database::select('SELECT * FROM users WHERE id = ?', [$session['user_id']]);
 
             $this->request->setUser($user);
-            $this->next();
+
+            return $this->next();
         } catch (\Exception $e) {
-            $this->next($e);
+            return $this->next($e);
         }
     }
 }

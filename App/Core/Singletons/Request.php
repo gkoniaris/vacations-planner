@@ -57,6 +57,10 @@ class Request extends Singleton
      */
     public function terminateRequestWithException($e, $status = 500)
     {
+        if (is_string($e)) {
+            $e = new \Exception($e);
+        }
+        
         $response = ['message' => $e->getMessage()];
         Response::json($response, $status);
         
@@ -106,7 +110,10 @@ class Request extends Singleton
             }
             
             $middlewares = $this->buildMiddlewares($route, $request);
-            if($middlewares) $middlewares->handle();
+            if($middlewares) {
+                $middlewareSuccessfulRun = $middlewares->handle();
+                if (!$middlewareSuccessfulRun) return false;
+            }
             
             $route['controller']::execute($route['method'], $this->data);
         } catch (\Exception $e) {
