@@ -4,6 +4,7 @@ namespace App\Core\Singletons;
 use App\Core\Patterns\Singleton;
 use App\Core\Singletons\Response;
 use App\Core\Services\DIContainer;
+
 use App\Middlewares\Cors;
 
 class Request extends Singleton
@@ -100,10 +101,12 @@ class Request extends Singleton
     public function serve()
     {
         try {
+            $request = Request::getInstance();
+
             $currentUri = $this->currentUri();
             $route = $this->router->findRouteInstance($currentUri, $this->method());
 
-            $cors = new Cors(Request::getInstance());
+            $cors = new Cors($request);
             $cors->handle();
 
             /**
@@ -114,16 +117,11 @@ class Request extends Singleton
                 
                 return Response::json(['error' => 'Not found']);
             }
-
-            // We use the Dependency Injection container to resolve all nested dependencies
-            $controllerWithDependencies = DIContainer::resolve($route['controller']);
-
-            $middlewares = $this->buildMiddlewares($route, Request::getInstance());
+            
+            $middlewares = $this->buildMiddlewares($route, $request);
             if($middlewares) $middlewares->handle();
-
-            $controllerFunctionDependencies = DIContainer::resolveFunctionArgs($route['controller'], $route['method']);
-            $controllerFunctionDependencies[] = $this->data;
-            $controllerWithDependencies->{$route['method']}(...$controllerFunctionDependencies);
+            
+            $route['controller']::execute($route['method'], $this->data);
         } catch (\Exception $e) {
             $this->terminateRequestWithException($e);
         }
