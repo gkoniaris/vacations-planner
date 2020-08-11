@@ -2,6 +2,7 @@
 
 namespace App\Core\Middlewares;
 use App\Core\Singletons\Response;
+
 /**
  * Base Middleware. All middlewares extend from this one
  */
