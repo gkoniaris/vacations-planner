@@ -54,6 +54,19 @@ class Router extends Singleton
     }
 
     /**
+     * Creates a delete route and inject into the router
+     *
+     * @param $controllerText
+     * @param $uri
+     * @param $middlewares
+     */
+    public function delete($controllerText, $uri, $middlewares = [])
+    {
+        $this->initializeRouterItem($controllerText, $uri, $middlewares, 'DELETE');
+    }
+
+
+    /**
      * Checks if a given route exists based on their uri and method
      *
      * @param $uri
