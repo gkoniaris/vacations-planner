@@ -13,6 +13,10 @@ abstract class BaseController
         $this->data = $data;
     }
 
+    /**
+     * Builds controller dependencies and executes
+     * the given method
+     */
     public static function execute($method, $data)
     {
         $controllerClass = static::class;
