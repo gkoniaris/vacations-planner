@@ -28,18 +28,6 @@ class Request extends Singleton
     }
 
     /**
-     * Returns the request instance (Singleton specific class)
-     */
-    public static function getInstance()
-    {
-        if (!isset(static::$instance)) {
-            static::$instance = new static();
-        }
-
-        return static::$instance;
-    }
-
-    /**
      * Returns the request http method
      */
     public static function method()
@@ -63,7 +51,6 @@ class Request extends Singleton
         return static::getInstance()->query;
     }
     
-
     /**
      * Terminates a request by returning a human readable message to the user
      * @param Exception [$e] An exception object that is passed to the function so we can get it's message
@@ -104,7 +91,7 @@ class Request extends Singleton
             $request = Request::getInstance();
 
             $currentUri = $this->currentUri();
-            $route = $this->router->findRouteInstance($currentUri, $this->method());
+            $route = $this->router->findRouteInstance($currentUri, $this->method);
 
             $cors = new Cors($request);
             $cors->handle();
