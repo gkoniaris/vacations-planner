@@ -40,8 +40,9 @@ class Authenticated extends BaseMiddleware
             $user = Database::select('SELECT * FROM users WHERE id = ?', [$session['user_id']]);
 
             $this->request->setUser($user);
+            $this->next();
         } catch (\Exception $e) {
-            $this->request->terminateRequestWithException($e);
+            $this->next($e);
         }
     }
 }

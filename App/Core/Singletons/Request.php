@@ -75,6 +75,22 @@ class Request extends Singleton
         exit();
     }
 
+    private function buildMiddlewares($route, $request)
+    {
+        if (!sizeof($route['middlewares'])) return false;
+
+        $middlewares = new $route['middlewares'][0]($request);
+
+        $i = 1;
+
+        while ($i < sizeof($route['middlewares']) - 1) {
+            $middlewares = $middlewares->setNext(new $route['middlewares'][$i](Request::getInstance()));
+            $i++;
+        }
+
+        return $middlewares;
+    }
+
     /**
      * Handles an incoming request by:
      * Returning to options request with cors headers
@@ -87,17 +103,13 @@ class Request extends Singleton
             $currentUri = $this->currentUri();
             $route = $this->router->findRouteInstance($currentUri, $this->method());
 
+            $cors = new Cors(Request::getInstance());
+            $cors->handle();
+
             /**
              * Handle 404 errors
              */
             if (!$route) {
-                $cors = new Cors(Request::getInstance());
-
-                // Don't return 404 for options requests
-                if ($this->method === 'OPTIONS') {
-                    exit(0);
-                }
-
                 header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
                 
                 return Response::json(['error' => 'Not found']);
@@ -106,9 +118,8 @@ class Request extends Singleton
             // We use the Dependency Injection container to resolve all nested dependencies
             $controllerWithDependencies = DIContainer::resolve($route['controller']);
 
-            foreach ($route['middlewares'] as $middleware) {
-                new $middleware(Request::getInstance());
-            }
+            $middlewares = $this->buildMiddlewares($route, Request::getInstance());
+            if($middlewares) $middlewares->handle();
 
             $controllerFunctionDependencies = DIContainer::resolveFunctionArgs($route['controller'], $route['method']);
             $controllerFunctionDependencies[] = $this->data;

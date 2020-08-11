@@ -7,5 +7,9 @@ namespace App\Core\Middlewares;
  */
 interface BaseMiddlewareInterface
 {
+    public function setNext(BaseMiddleware $nextMiddleware);
+    
     public function handle();
+    
+    public function next(...$params);
 }

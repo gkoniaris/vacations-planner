@@ -28,5 +28,7 @@ class IsSupervisor extends BaseMiddleware
 
             return Response::redirect($settings['FRONTEND_URL'] . '/?error=true&message=You dont have permissions for this action');
         }
+
+        $this->next();
     }
 }
