@@ -5,27 +5,14 @@ use App\Core\Patterns\Singleton;
 
 class Database extends Singleton
 {
-    protected static $instance;
-    protected static $connection;
+    protected $connection;
 
     /**
      * Database constructor.
      */
     protected function __construct()
     {
-        static::$connection = $this->initializeConnection();
-    }
-
-    /**
-     * Returns the database instance (Singleton specific class)
-     */
-    public static function getInstance()
-    {
-        if (!isset(static::$instance)) {
-            static::$instance = new static();
-        }
-
-        return static::$instance;
+        $this->connection = $this->initializeConnection();
     }
 
     /**
@@ -53,9 +40,9 @@ class Database extends Singleton
     /**
      * ORM like functions wrapping the PHP PDO
      */
-    public static function select($query, $params = [], $model = null)
+    public function select($query, $params = [], $model = null)
     {
-        $initialStmt = static::getInstance()::$connection->prepare($query);
+        $initialStmt = $this->connection->prepare($query);
 
         $initialStmt->execute($params);
 
@@ -68,9 +55,9 @@ class Database extends Singleton
         return $initialStmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public static function selectAll($query, $params = [], $model = null)
+    public function selectAll($query, $params = [], $model = null)
     {
-        $initialStmt = static::getInstance()::$connection->prepare($query);
+        $initialStmt = $this->connection->prepare($query);
 
         $initialStmt->execute($params);
 
@@ -81,10 +68,10 @@ class Database extends Singleton
         return $initialStmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public static function insert($query, $params = [])
+    public function insert($query, $params = [])
     {
-        $dbh = static::getInstance()::$connection;
-        $initialStmt = static::getInstance()::$connection->prepare($query);
+        $dbh = $this->connection;
+        $initialStmt = $this->connection->prepare($query);
         
         $inTransaction = $dbh->inTransaction();
         if (!$inTransaction) {
@@ -101,35 +88,35 @@ class Database extends Singleton
         return $lastInsertedId;
     }
 
-    public static function create($query)
+    public function create($query)
     {
-        return static::getInstance()::$connection->exec($query);
+        return $this->connection->exec($query);
     }
 
-    public static function update($query, $params = [])
+    public function update($query, $params = [])
     {
-        $initialStmt = static::getInstance()::$connection->prepare($query);
+        $initialStmt = $this->connection->prepare($query);
 
         return $initialStmt->execute($params);
     }
 
-    public static function execute($query)
+    public function execute($query)
     {
-        return static::getInstance()::$connection->exec($query);
+        return $this->connection->exec($query);
     }
 
-    public static function beginTransaction()
+    public function beginTransaction()
     {
-        static::getInstance()::$connection->beginTransaction();
+        $this->connection->beginTransaction();
     }
 
-    public static function commit()
+    public function commit()
     {
-        static::getInstance()::$connection->commit();
+        $this->connection->commit();
     }
 
-    public static function rollback()
+    public function rollback()
     {
-        static::getInstance()::$connection->rollback();
+        $this->connection->rollback();
     }
 }

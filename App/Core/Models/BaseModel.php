@@ -17,6 +17,8 @@ abstract class BaseModel implements BaseModelInterface
         if ($this->table === null) {
             throw new \Exception('Provide table name');
         }
+
+        $this->database = Database::getInstance();
     }
 
     private function generatePlaceholders($length)
@@ -41,7 +43,7 @@ abstract class BaseModel implements BaseModelInterface
 
     public function all()
     {
-        $results = Database::selectAll(
+        $results = $this->database->selectAll(
             'SELECT * FROM ' . $this->table,
             [],
             get_class($this)
@@ -52,7 +54,7 @@ abstract class BaseModel implements BaseModelInterface
 
     public function find($id)
     {
-        $results = Database::select(
+        $results = $this->database->select(
             'SELECT * FROM ' . $this->table . ' WHERE id = ?',
             [$id],
             get_class($this)
@@ -63,7 +65,7 @@ abstract class BaseModel implements BaseModelInterface
 
     public function findBy($field, $value)
     {
-        $results = Database::select(
+        $results = $this->database->select(
             'SELECT * FROM ' . $this->table . ' WHERE ' . $field . ' = ?',
             [$value],
             get_class($this)
@@ -104,7 +106,7 @@ abstract class BaseModel implements BaseModelInterface
         $placeholders = $this->generatePlaceholders(sizeof($modelData));
         $values = array_values($modelData);
 
-        $id = Database::insert(
+        $id = $this->database->insert(
             'INSERT INTO ' . $this->table . ' (' . $fields . ') VALUES (' . $placeholders . ')',
             $values
         );

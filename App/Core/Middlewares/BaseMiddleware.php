@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Core\Middlewares;
+
 use App\Core\Singletons\Response;
 
 /**
@@ -18,8 +19,11 @@ abstract class BaseMiddleware implements BaseMiddlewareInterface
     
     /**
      * Sets the next middleware to be called
+     *
+     * @param  mixed $nextMiddleware A middleware having BaseMiddlewareInterface as it's parent class
+     * @return mixed
      */
-    public function setNext(BaseMiddleware $nextMiddleware)
+    public function setNext(BaseMiddlewareInterface $nextMiddleware)
     {
         $this->nextMiddleware = $nextMiddleware;
 
@@ -36,6 +40,9 @@ abstract class BaseMiddleware implements BaseMiddlewareInterface
 
     /**
      * Calls the next middleware if one is set
+     *
+     * @param  mixed $params
+     * @return void
      */
     public function next(...$params)
     {
