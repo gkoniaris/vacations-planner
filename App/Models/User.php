@@ -15,7 +15,7 @@ class User extends BaseModel
 
     private function setPTODays($user, $days = 21)
     {
-        Database::insert('INSERT INTO pto(employee_id, remaining_days) VALUES(?, ?)', [
+        $this->database->insert('INSERT INTO pto(employee_id, remaining_days) VALUES(?, ?)', [
             $user->id, 
             $days
         ]);

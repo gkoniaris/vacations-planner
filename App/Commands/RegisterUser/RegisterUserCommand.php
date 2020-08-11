@@ -10,17 +10,19 @@ use App\Classes\Helpers;
 
 class RegisterUserCommand extends BaseCommand
 {
+    protected $database;
     protected $data;
 
-    public function __construct($data)
+    public function __construct(Database $database, $data)
     {
+        $this->database = $database;
         $this->data = $data;
     }
 
     public function execute(UserService $userService, CompanyService $companyService)
     {
         try {
-            Database::beginTransaction();
+            $this->database->beginTransaction();
     
             $company = $companyService->create($this->data->company);
             
@@ -29,9 +31,9 @@ class RegisterUserCommand extends BaseCommand
     
             $user = $userService->create($this->data->user);
             
-            Database::commit();
+            $this->database->commit();
         } catch(\Exception $e) {
-            Database::rollback();
+            $this->database->rollback();
 
             throw $e;
         }

@@ -9,9 +9,10 @@ use App\Models\Company as CompanyModel;
 
 class UserService
 {
-    public function __construct(UserModel $user)
+    public function __construct(UserModel $user, Database $database)
     {
         $this->user = $user;
+        $this->database = $database;
     }
 
     /**
@@ -69,7 +70,7 @@ class UserService
      */
     public function create($data)
     {      
-        $user = Database::select('SELECT id FROM users WHERE email = ?', [$data->email]);
+        $user = $this->database->select('SELECT id FROM users WHERE email = ?', [$data->email]);
 
         //Return if user already exists
         if ($user) {
@@ -100,25 +101,25 @@ class UserService
      */
     public function update($data)
     {
-        Database::beginTransaction();
+        $this->database->beginTransaction();
         
-        $user = Database::select('SELECT id FROM users WHERE id = ?', [$data->id]);
+        $user = $this->database->select('SELECT id FROM users WHERE id = ?', [$data->id]);
 
         if (!$user) {
-            Database::rollback();
+            $this->database->rollback();
             throw new FunctionalException('The user does not exist');
         }
 
-        Database::update('UPDATE users SET email = ?, first_name = ?, last_name = ? WHERE id = ?', [
+        $this->database->update('UPDATE users SET email = ?, first_name = ?, last_name = ? WHERE id = ?', [
             $data->email,
             $data->first_name,
             $data->last_name,
             $data->id
         ]);
 
-        $user = Database::select('SELECT id FROM users WHERE id = ?', [$data->id]);
+        $user = $this->database->select('SELECT id FROM users WHERE id = ?', [$data->id]);
 
-        Database::commit();
+        $this->database->commit();
 
         return $user;
     }
@@ -155,7 +156,7 @@ class UserService
         $uniqueId = uniqid('', true); // Add true for more entropy
         $_SESSION['unique_id'] = $uniqueId;
         
-        $stmt = Database::insert("INSERT INTO sessions(user_id, session_id, expires_at) 
+        $stmt = $this->database->insert("INSERT INTO sessions(user_id, session_id, expires_at) 
             VALUES (?, ?, CURRENT_TIMESTAMP + INTERVAL 1 DAY)", [
                 $userId,
                 $uniqueId

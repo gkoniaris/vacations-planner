@@ -4,6 +4,7 @@ require_once('./App/Core/Patterns/Singleton.php');
 require_once('./App/Core/Singletons/Database.php');
 require_once('./App/config.php');
 
+$database = App\Core\Singletons\Database::getInstance();
 try {
     $seedFiles = scandir('./database/seeds');
 
@@ -14,7 +15,7 @@ try {
 
         $seed = file_get_contents('./database/seeds/' . $file);
 
-        App\Core\Singletons\Database::execute($seed);
+        $database->execute($seed);
 
         echo "Seed $seedName ran successfully \n";
     }

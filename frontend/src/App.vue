@@ -104,7 +104,10 @@
             </a>
           </div>
         </div>
-        <router-view class="col-xl-10 col-md-9 pl-3 pr-3 pt-5" />
+        <router-view
+          :class="{'col-xl-10 col-md-9': isLogged, 'col-xl-12': !isLogged}"
+          class="col-xl-10 col-md-9 pl-3 pr-3 pt-5"
+        />
       </div>
     </div>
   </div>

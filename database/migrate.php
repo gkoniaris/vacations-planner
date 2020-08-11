@@ -4,8 +4,9 @@ require_once('./App/Core/Patterns/Singleton.php');
 require_once('./App/Core/Singletons/Database.php');
 require_once('./App/config.php');
 
+$database = App\Core\Singletons\Database::getInstance();
 try {
-    App\Core\Singletons\Database::create('CREATE table migrations(
+    $database->create('CREATE table migrations(
         id INT(10) UNSIGNED AUTO_INCREMENT  PRIMARY KEY,
         migration VARCHAR(30),
         run TINYINT(0) DEFAULT 0
@@ -16,7 +17,7 @@ try {
 }
 
 try {
-    $migrations = App\Core\Singletons\Database::selectAll('SELECT * FROM migrations');
+    $migrations = selectAll('SELECT * FROM migrations');
     $migrationFiles = scandir('./database/migrations');
 
     foreach($migrationFiles as $file) {
@@ -32,8 +33,8 @@ try {
 
         $migration = file_get_contents('./database/migrations/' . $file);
 
-        App\Core\Singletons\Database::execute($migration);
-        App\Core\Singletons\Database::insert('INSERT INTO migrations(migration, run) VALUES(?, ?)', [$migrationName, 1]);
+        $database->execute($migration);
+        $database->insert('INSERT INTO migrations(migration, run) VALUES(?, ?)', [$migrationName, 1]);
 
         echo "Migration $migrationName ran successfully \n";
     }
