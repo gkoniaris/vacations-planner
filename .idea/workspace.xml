@@ -2,18 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09be0b94-d88e-4211-8cde-23d96db36d7f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/App/Classes/Application.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Classes/Application.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vacations-planner.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vacations-planner.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/AuthController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Core/Commands/BaseCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Core/Commands/BaseCommand.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Core/Commands/BaseCommandInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Core/Commands/BaseCommandInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Core/Commands/CommandsInvoker.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Core/Commands/CommandsInvoker.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Core/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Core/Controllers/BaseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Core/Middlewares/BaseMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Core/Middlewares/BaseMiddleware.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Core/Patterns/Singleton.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Core/Patterns/Singleton.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Core/Services/DIContainer.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Core/Services/DIContainer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Core/Singletons/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Core/Singletons/Request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Core/Singletons/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Core/Singletons/Router.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Middlewares/Authenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Middlewares/Authenticated.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Services/UserService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/UserService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/config.php" afterDir="false" />
@@ -32,29 +27,13 @@
     </execution>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file:$PROJECT_DIR$/../../../../..//$PROJECT_DIR$/App/Classes/Application.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
-              <folding>
-                <element signature="e#31#64#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:$PROJECT_DIR$/../../../../..//$PROJECT_DIR$/App/Core/Commands/BaseCommand.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>terminate</find>
+      <find>terminateRequestWithException</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -63,6 +42,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/App/Classes/Application.php" />
+        <option value="$PROJECT_DIR$/App/Core/Singletons/Router.php" />
+        <option value="$PROJECT_DIR$/App/Core/Singletons/Request.php" />
       </list>
     </option>
   </component>
@@ -89,10 +70,6 @@
           <expand>
             <path>
               <item name="vacations-planner" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vacations-planner" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="vacations-planner" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="bcb0276e:PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
             </path>
           </expand>
@@ -107,6 +84,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="vcs.Subversion.Presentation" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -127,7 +105,7 @@
     </option>
   </component>
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>C:\Users\george\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -137,16 +115,15 @@
       <option name="presentableId" value="Default" />
       <updated>1597309512502</updated>
       <workItem from="1597309513783" duration="58000" />
-      <workItem from="1597309615171" duration="68000" />
+      <workItem from="1597309615171" duration="817000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126000" />
+    <option name="totallyTimeSpent" value="875000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="595" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -162,7 +139,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" visible="true" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -173,6 +150,16 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file:$PROJECT_DIR$/../../../../..//$PROJECT_DIR$/App/Classes/Application.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-241">
+          <caret line="31" column="23" lean-forward="true" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+          <folding>
+            <element signature="e#31#64#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file:$PROJECT_DIR$/../../../../..//$PROJECT_DIR$/App/Core/Commands/BaseCommand.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -180,13 +167,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:$PROJECT_DIR$/../../../../..//$PROJECT_DIR$/App/Classes/Application.php">
+    <entry file="file:$PROJECT_DIR$/../../../../..//$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#31#64#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="15" column="11" lean-forward="true" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:$PROJECT_DIR$/../../../../..//$PROJECT_DIR$/App/Core/Singletons/Request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="79" column="5" lean-forward="true" selection-start-line="79" selection-start-column="5" selection-end-line="79" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:$PROJECT_DIR$/../../../../..//$PROJECT_DIR$/App/Core/Singletons/Router.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="149" column="46" lean-forward="true" selection-start-line="149" selection-start-column="46" selection-end-line="149" selection-end-column="46" />
         </state>
       </provider>
     </entry>
