@@ -47,15 +47,11 @@ class AuthService
 
         if (!password_verify($user->salt . '.' . $password, $user->password)) return false;
         
-        unset($user->password);
-        unset($user->salt);
-
-        if ($user) {
-            $this->createSession($user->id);
+        $this->createSession($user->id);
+        
+        $user = $this->user->findBy('email', $email);
             
-            return $user;
-        }
+        return $user;
 
-        return false;
     }
 }
