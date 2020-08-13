@@ -11,6 +11,9 @@ abstract class BaseModel implements BaseModelInterface
     protected $limit = null;
     protected $data = [];
     protected $fillable = [];
+    protected $hidden = [];
+    protected $withHidden = false;
+    protected $database;
 
     public function __construct()
     {
@@ -35,6 +38,42 @@ abstract class BaseModel implements BaseModelInterface
         return $placeholders;
     }
 
+    private function removeHidden($dataset)
+    {
+        if ($this->withHidden) return $dataset;
+        if (!sizeof($this->hidden)) return $dataset;
+
+        if (is_object($dataset))
+        {
+            foreach($this->hidden as $key)
+            {
+                unset($dataset->{$key});
+            }
+
+            return $dataset;
+        }
+
+        if (is_array($dataset))
+        {
+            foreach($dataset as $item)
+            {
+                foreach($this->hidden as $key)
+                {
+                    unset($item->{$key});
+                }
+            }
+
+            return $dataset;
+        }
+    }
+
+    public function withHidden()
+    {
+        $this->withHidden = true;
+
+        return $this;
+    }
+
     public function set($field, $value)
     {
         $this->{$field} = $value;
@@ -49,7 +88,7 @@ abstract class BaseModel implements BaseModelInterface
             get_class($this)
         );
 
-        return $results;
+        return $this->removeHidden($results);
     }
 
     public function find($id)
@@ -60,18 +99,20 @@ abstract class BaseModel implements BaseModelInterface
             get_class($this)
         );
 
-        return $results;
+        return $this->removeHidden($results);
     }
 
     public function findBy($field, $value)
     {
+        $selector = $this->getSelector();
+
         $results = $this->database->select(
             'SELECT * FROM ' . $this->table . ' WHERE ' . $field . ' = ?',
             [$value],
             get_class($this)
         );
 
-        return $results;
+        return $this->removeHidden($results);
     }
 
     public function fill($data)
