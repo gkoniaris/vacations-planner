@@ -10,6 +10,7 @@ $router->post('App\Controllers\AuthController@register', '/api/register');
 
 $router->get('App\Controllers\IndustryController@index', '/api/taxonomies/industries');
 
+$router->get('App\Controllers\AuthController@me', '/api/me', ['App\Middlewares\Authenticated']);
 $router->get('App\Controllers\UserController@get', '/api/users', ['App\Middlewares\Authenticated', 'App\Middlewares\IsSupervisor']);
 $router->post('App\Controllers\UserController@create', '/api/users', ['App\Middlewares\Authenticated', 'App\Middlewares\IsSupervisor']);
 $router->PUT('App\Controllers\UserController@update', '/api/users', ['App\Middlewares\Authenticated', 'App\Middlewares\IsSupervisor']);

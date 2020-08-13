@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Controllers\BaseController;
 use App\Services\UserService;
+use App\Services\AuthService;
 use App\Core\Singletons\Request;
 use App\Core\Singletons\Response;
 use App\Validators\LoginValidator;
@@ -19,6 +20,11 @@ class AuthController extends BaseController
     public function __construct(UserService $user)
     {
         $this->user = $user;
+    }
+
+    public function me(Request $request)
+    {
+        return Response::json($request->user());
     }
 
     public function login($data)

@@ -76,7 +76,7 @@
               <img src="./assets/images/avatar.png" />
             </div>
             <div class="welcome-back">
-              <h5 class="mt-5 mb-3">Welcome back, {{user.name}}</h5>
+              <h5 class="mt-5 mb-3">Welcome back, {{user.first_name}}</h5>
             </div>
           </div>
           <div class="row text-center">
@@ -115,6 +115,7 @@
 
 <script>
 import { EventBus } from './eventbus'
+import http from './http'
 
 export default {
   name: 'App',
@@ -123,9 +124,7 @@ export default {
   },
   data () {
     return {
-      user: {
-        name: 'Liza'
-      },
+      user: {},
       isLogged: false,
       role: null
     }
@@ -139,6 +138,13 @@ export default {
     init () {
       this.isLogged = localStorage.getItem('isLogged') === 'true'
       this.role = localStorage.getItem('role')
+
+      if (this.isLogged) {
+        http.get('/api/me', { withCredentials: true })
+          .then(response => {
+            this.user = response.data
+          })
+      }
     },
     logout () {
       localStorage.removeItem('isLogged')
