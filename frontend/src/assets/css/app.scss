@@ -1,5 +1,7 @@
 @import './variables.scss';
 @import './toaster.scss';
+@import './fontawesome.scss';
+
 
 html,
 body,
@@ -17,10 +19,6 @@ body {
 .main-body {
     padding-left: 0;
     padding-right: 0;
-}
-
-.fa-3 {
-    font-size: 4rem;
 }
 
 .bg-purple {
