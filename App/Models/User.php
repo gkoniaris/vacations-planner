@@ -13,6 +13,11 @@ class User extends BaseModel
         'last_name'
     ];
 
+    protected $hidden = [
+        'password',
+        'salt'
+    ];
+
     private function setPTODays($user, $days = 21)
     {
         $this->database->insert('INSERT INTO pto(employee_id, remaining_days) VALUES(?, ?)', [

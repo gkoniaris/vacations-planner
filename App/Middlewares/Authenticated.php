@@ -5,6 +5,7 @@ use App\Core\Middlewares\BaseMiddleware;
 use App\Core\Singletons\Request;
 use App\Core\Singletons\Response;
 use App\Core\Singletons\Database;
+use App\Models\User;
 
 /**
  * Middleware that checks if a user has a valid active session
@@ -14,11 +15,12 @@ class Authenticated extends BaseMiddleware
     protected $request;
     protected $db;
     
-    public function __construct(Request $request)
+    public function __construct(Request $request, User $user)
     {
         parent::__construct();
         $this->request = $request;
         $this->database = Database::getInstance();
+        $this->user = $user;
     }
 
     public function handle()
@@ -36,7 +38,7 @@ class Authenticated extends BaseMiddleware
                 return $this->request->abort('You are not allowed to perform this action', 401);
             }
 
-            $user = $this->database->select('SELECT * FROM users WHERE id = ?', [$session['user_id']]);
+            $user = $this->user->find($session['user_id']);
 
             $this->request->setUser($user);
 
