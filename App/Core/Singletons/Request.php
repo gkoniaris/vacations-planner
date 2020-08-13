@@ -80,12 +80,12 @@ class Request extends Singleton
     {
         if (!sizeof($route['middlewares'])) return false;
 
-        $middlewares = new $route['middlewares'][0]($request);
+        $middlewares = DIContainer::resolve($route['middlewares'][0]);
 
         $i = 1;
 
         while ($i < sizeof($route['middlewares']) - 1) {
-            $middlewares = $middlewares->setNext(new $route['middlewares'][$i](Request::getInstance()));
+            $middlewares = $middlewares->setNext(DIContainer::resolve($route['middlewares'][$i]));
             $i++;
         }
 
