@@ -58,6 +58,7 @@ class Router extends Singleton
      *
      * @param $uri
      * @param $method
+     *
      */
     public function findRouteInstance($uri, $method)
     {
@@ -146,7 +147,7 @@ class Router extends Singleton
                 }
             }
         } catch (\Exception $e) {
-            Request::getInstance()->terminateRequestWithException($e);
+            Request::getInstance()->abort($e);
         }
     }
 }

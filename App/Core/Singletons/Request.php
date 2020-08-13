@@ -69,7 +69,7 @@ class Request extends Singleton
                     break;
             }
         } catch (\Exception $e) {
-            $this->terminateRequestWithException($e);
+            $this->abort($e);
         }
     }
 
