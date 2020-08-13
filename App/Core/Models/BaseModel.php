@@ -13,7 +13,7 @@ abstract class BaseModel implements BaseModelInterface
     protected $fillable = [];
     protected $hidden = [];
     protected $withHidden = false;
-    protected $database;
+    private $database;
 
     public function __construct()
     {
@@ -104,8 +104,6 @@ abstract class BaseModel implements BaseModelInterface
 
     public function findBy($field, $value)
     {
-        $selector = $this->getSelector();
-
         $results = $this->database->select(
             'SELECT * FROM ' . $this->table . ' WHERE ' . $field . ' = ?',
             [$value],

@@ -16,34 +16,6 @@ class UserService
     }
 
     /**
-     * Performs login and creates a session for the user
-     *
-     * @param $data
-     */
-    public function login($data)
-    {
-        $email = $data->email;
-        $password = $data->password;
-        
-        $user = $this->findByEmailPassword($email, $password);
-        
-        if (!$user) return false;
-
-        if (!password_verify($user->salt . '.' . $password, $user->password)) return false;
-        
-        unset($user->password);
-        unset($user->salt);
-
-        if ($user) {
-            $this->saveSession($user->id);
-            
-            return $user;
-        }
-
-        return false;
-    }
-
-    /**
      * Returns all users
      */
     public function all()
@@ -122,44 +94,5 @@ class UserService
         $this->database->commit();
 
         return $user;
-    }
-
-    /**
-     * Returns a user by searching their email and hash password
-     *
-     * @param $email
-     * @param $password
-     */
-    private function findByEmailPassword($email, $password)
-    {
-        $user = $this->user->findBy('email', $email);
-
-        if (!$user) {
-            return false;
-        }
-        
-        return $user;
-
-    }
-
-    /**
-     * Creates a cookie session
-     *
-     * @param $userId
-     */
-    private function saveSession($userId)
-    {
-        session_start([
-            'cookie_lifetime' => 86400,
-        ]);
-     
-        $uniqueId = uniqid('', true); // Add true for more entropy
-        $_SESSION['unique_id'] = $uniqueId;
-        
-        $stmt = $this->database->insert("INSERT INTO sessions(user_id, session_id, expires_at) 
-            VALUES (?, ?, CURRENT_TIMESTAMP + INTERVAL 1 DAY)", [
-                $userId,
-                $uniqueId
-            ]);
     }
 }

@@ -17,9 +17,10 @@ class AuthController extends BaseController
 {
     protected $user;
 
-    public function __construct(UserService $user)
+    public function __construct(UserService $user, AuthService $auth)
     {
         $this->user = $user;
+        $this->auth = $auth;
     }
 
     public function me(Request $request)
@@ -35,7 +36,7 @@ class AuthController extends BaseController
             return Response::json(['message' => $validated], 400);
         }
 
-        $user = $this->user->login($data);
+        $user = $this->auth->login($data->email, $data->password);
 
         if (!$user) {
             $responseData = ['message' => 'Please enter valid credentials'];
